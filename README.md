@@ -1,9 +1,14 @@
 # Exasol Error Catalog
 
-Tooling for crawling all error codes and generating a online error catalog.
+Exasol's "Error Catalog" (short "ECAT") is a project that collects individual error lists from project repositories and generates a catalog that can be viewed with a web browser.
 
-## Additional Information
+This catalog contains the error codes, descriptions and mitigation information for all scanned projects.
+
+## Information For Users
 
 * [Changelog](doc/changes/changelog.md)
-* [Dependencies](dependencies.md)
 
+## Information For Developers
+
+* [System Requirements](doc/system_requirements.md)
+* [Dependencies](dependencies.md)
