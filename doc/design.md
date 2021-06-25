@@ -21,7 +21,7 @@ All steps will run once nightly, in succession, resulting in updated documentati
 
 The crawler will use the Github REST API to crawl the exasol organisation public repositories and find all 'error_code_report.json` files.
 An internal list will be made and these files will then in a following step be transferred to an AWS bucket / filesystem.
-We plan on checking the version tag(s) and if these increase fetch the new json file, and store it with its version tage (and possibly a timestamp)
+We plan on checking the version tag(s) per repository and if these increase fetch the new json file(s), and store these with the version tag (and possibly a timestamp) appended at the end of the json filenames.
 
 -> TEST suggestion; see for the whole organisation and specify a minimum to compare against.
 -> TEST suggestion ; specify a collection -> see if we get the path to the json(s).
@@ -31,6 +31,8 @@ Covers:
 * `req~collecting-error-lists-from-github-projects~1`
 
 ## The parser
+
+First we considered a template engine but currently we're opting for a HTML generator as a 'middle ground' approach to generating the pages/content.
 
 ### Content Design Separation
 `dsn~content-design-separation~1`
