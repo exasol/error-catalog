@@ -14,7 +14,7 @@ import com.exsol.errorcodemodel.ErrorMessageDeclaration;
  * This class renders the error catalog web site.
  */
 public class ErrorCatalogRenderer {
-    public static final String ERROR_CODES_DIRECTORY = "error-codes";
+    private static final String ERROR_CODES_DIRECTORY = "error-codes";
     private static final Path TARGET_DIR = Path.of("/tmp/catalog/");
 
     /**

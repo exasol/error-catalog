@@ -47,7 +47,6 @@
 | [Maven Site Plugin 3][58]                               | [The Apache Software License, Version 2.0][5] |
 
 [28]: https://github.com/exasol/project-keeper-maven-plugin
-[30]: https://www.eclemma.org/jacoco/index.html
 [0]: https://github.com/exasol/error-reporting-java
 [7]: https://www.opensource.org/licenses/mit-license.php
 [5]: http://www.apache.org/licenses/LICENSE-2.0.txt
@@ -62,6 +61,7 @@
 [32]: http://maven.apache.org/plugins/maven-gpg-plugin/
 [31]: https://www.eclipse.org/legal/epl-2.0/
 [37]: http://www.eclipse.org/legal/epl-v10.html
+[30]: https://www.jacoco.org/jacoco/trunk/doc/maven.html
 [44]: http://zlika.github.io/reproducible-build-maven-plugin
 [54]: http://maven.apache.org/plugins/maven-jar-plugin/
 [2]: https://github.com/exasol/error-code-model-java

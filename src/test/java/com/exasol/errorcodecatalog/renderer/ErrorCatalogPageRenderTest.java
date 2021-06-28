@@ -11,6 +11,6 @@ class ErrorCatalogPageRenderTest {
     void test() {
         final String result = new ErrorCatalogPageRender().render("My Page", h1("Test"));
         assertThat(result, equalTo(
-                "<html><title>Exasol Error Catalog – My Page</title><head><link rel=\"stylesheet\" href=\"error-catalog-style.css\"></head><body><div class=\"mainBox\"><h1>Test</h1></div></body></html>"));
+                "<html><title>Exasol Error Catalog – My Page</title><head><link rel=\"stylesheet\" href=\"../error-catalog-style.css\"></head><body><div id=\"navbar\"><span>Exasol Error Catalog</span></div><div id=\"mainBox\"><h1>Test</h1></div></body></html>"));
     }
 }

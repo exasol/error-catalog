@@ -11,9 +11,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>16</java.version>
+        <java.version>11</java.version>
         <junit.version>5.7.0</junit.version>
-        <jacoco.version>0.8.5</jacoco.version>
         <gpg.skip>true</gpg.skip>
         <org.testcontainers.version>1.15.1</org.testcontainers.version>
         <!--
@@ -242,12 +241,15 @@
                     <modules>
                         <module>jar_artifact</module>
                     </modules>
+                    <excludedFiles>
+                        <excludedFile>.travis.yml</excludedFile>
+                    </excludedFiles>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.7</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
