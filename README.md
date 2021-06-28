@@ -11,4 +11,5 @@ This catalog contains the error codes, descriptions and mitigation information f
 ## Information For Developers
 
 * [System Requirements](doc/system_requirements.md)
+[Design Document](doc/design.md)
 * [Dependencies](dependencies.md)
