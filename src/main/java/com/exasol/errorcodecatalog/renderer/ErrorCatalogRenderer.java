@@ -31,11 +31,13 @@ public class ErrorCatalogRenderer {
     }
 
     private void deleteTargetDirectory() {
-        try (final Stream<Path> pathStream = Files.walk(TARGET_DIR)) {
-            pathStream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
-        } catch (final IOException exception) {
-            throw new IllegalStateException(ExaError.messageBuilder("E-EC-8")
-                    .message("Failed to empty error-catalog target directory.").toString(), exception);
+        if (Files.exists(TARGET_DIR)) {
+            try (final Stream<Path> pathStream = Files.walk(TARGET_DIR)) {
+                pathStream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
+            } catch (final IOException exception) {
+                throw new IllegalStateException(ExaError.messageBuilder("E-EC-8")
+                        .message("Failed to empty error-catalog target directory.").toString(), exception);
+            }
         }
     }
 
