@@ -8,7 +8,7 @@ This is the technical design document of the Error Catalog Project. The design f
 
 The error catalog consists of the following main parts:
 
-* Crawler: Collects error_code_report.json (json) files and stores them locally or in AWS, ideally in a folder with timestamp
+* Crawler: Collects error_code_report.json (JSON) files and stores them locally or in AWS, ideally in a folder with timestamp
 * Parser: Processes the stored .json files and turns them into documentation. 
 
 This documentation will then be transferred to a static web server somewhere.
@@ -21,10 +21,10 @@ All steps will run once nightly, in succession, resulting in updated documentati
 
 The crawler will use the Github REST API to crawl the Exasol organisation public repositories and find all 'error_code_report.json` files.
 An internal list will be made and these files will then in a following step be downloaded.
-We plan on checking the version tag(s) per repository and if these increase fetch the new json file(s), and store these with the version tag (and possibly a timestamp) appended at the end of the json filenames.
+We plan on checking the version tag(s) per repository and if these increase fetch the new JSON file(s), and store these with the version tag (and possibly a timestamp) appended at the end of the JSON filenames.
 
 -> TEST suggestion; see for the whole organisation and specify a minimum to compare against.
--> TEST suggestion ; specify a collection -> see if we get the path to the json(s).
+-> TEST suggestion ; specify a collection -> see if we get the path to the JSON(s).
 
 Covers:
 
@@ -37,7 +37,7 @@ First we considered a template engine but currently we're opting for a HTML gene
 ### Content Design Separation
 `dsn~content-design-separation~1`
 
-We split the css into a separate file.
+We split the CSS into a separate file.
 
 Covers:
 
@@ -46,7 +46,7 @@ Covers:
 ### Content Design
 `dsn~corporate-design~1`
 
- After a brief discussion we currently opt to use a minimal css style that will be hosted in a separate css file as well as a small logo.
+ After a brief discussion we currently opt to use a minimal CSS style that will be hosted in a separate CSS file as well as a small logo.
  We might switch to a subset of bootstrap or something similar if this is required later on.
  
 Covers:
@@ -64,7 +64,7 @@ Covers:
 ### View With Any Browser
 `dsn~view-with-any-browser~1`
 
-The css will be adequately responsive so any browsers on any devices can view the content.
+The CSS will be adequately responsive so any browsers on any devices can view the content.
 The styles will be kept to an absolute minimum.
 
 TODO: We will manually need to test this so a test requirement of some kind on multiple browsers?
@@ -78,7 +78,7 @@ Covers:
 ### Project Entry Point
 `dsn~projects-entry-point~1`
 
-We will generate an overview page that lists an overview of all the public projects that incorporate the error handling parsers (and generate json files).
+We will generate an overview page that lists an overview of all the public projects that incorporate the error handling parsers (and generate JSON files).
 Then per project there will be a listing of all error messages of that project.
 (One repository/project could be generated from multiple JSON files.)
 
