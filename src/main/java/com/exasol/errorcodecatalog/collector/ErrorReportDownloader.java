@@ -14,19 +14,23 @@ import com.exasol.errorreporting.ExaError;
  * This class downloads the error-code reports from the github releases.
  */
 class ErrorReportDownloader {
-    private static final Path LOCAL_REPO = Path.of("/tmp/error-reports/");
+
+    private final Path localRepo;
 
     /**
      * Create a new instance of {@link ErrorReportDownloader}.
+     * 
+     * @param localRepo target directory for the error-code report files.
      */
-    ErrorReportDownloader() {
+    ErrorReportDownloader(final Path localRepo) {
+        this.localRepo = localRepo;
         createLocalRepoIfNotExists();
     }
 
     private void createLocalRepoIfNotExists() {
-        if (!Files.exists(LOCAL_REPO)) {
+        if (!Files.exists(this.localRepo)) {
             try {
-                Files.createDirectories(LOCAL_REPO);
+                Files.createDirectories(this.localRepo);
             } catch (final IOException exception) {
                 throw new IllegalStateException(
                         ExaError.messageBuilder("E-EC-2")
@@ -56,7 +60,7 @@ class ErrorReportDownloader {
     }
 
     private Path downloadReportIfNotExistsInternal(final ReleaseReference release) throws IOException {
-        final Path repoPath = LOCAL_REPO.resolve(release.repository());
+        final Path repoPath = this.localRepo.resolve(release.repository());
         if (!Files.exists(repoPath)) {
             Files.createDirectories(repoPath);
         }

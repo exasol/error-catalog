@@ -1,12 +1,19 @@
 package com.exasol.errorcodecatalog.collector;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class ErrorReportDownloaderTest {
     @Test
-    void test() {
+    void test(@TempDir final Path tempDir) {
         final ReleaseReference release = new ReleaseReference("error-code-crawler-maven-plugin", "0.5.0",
                 "https://github.com/exasol/error-code-crawler-maven-plugin/releases/download/0.5.0/error_code_report.json");
-        new ErrorReportDownloader().downloadReportIfNotExists(release);
+        new ErrorReportDownloader(tempDir).downloadReportIfNotExists(release);
+        assertTrue(Files.exists(tempDir.resolve(Path.of("error-code-crawler-maven-plugin", "0.5.0.json"))));
     }
 }
