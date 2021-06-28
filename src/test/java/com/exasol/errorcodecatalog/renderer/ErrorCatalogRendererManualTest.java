@@ -19,11 +19,19 @@ class ErrorCatalogRendererManualTest {
 
     @Test
     void test() {
-        final ErrorMessageDeclaration errorMessageDeclaration = ErrorMessageDeclaration.builder().identifier("E-TEST-1")
+        final ErrorMessageDeclaration errorMessageDeclaration1 = ErrorMessageDeclaration.builder()
+                .identifier("E-TEST-1")
                 .prependMessage(
                         "Two error codes cover the same package: {{package}} was declared for {{first}} and {{second}}.")
+                .appendMitigation("Rename one of the codes.")
+                .addParameter("package", "The package name that bother error codes declare").addParameter("first", "")
+                .addParameter("second", "").build();
+        final ErrorMessageDeclaration errorMessageDeclaration2 = ErrorMessageDeclaration.builder()
+                .identifier("F-TEST-2").prependMessage("Download of {{url}} failed.")
+                .appendMitigation("Check your internet connection.").appendMitigation("Check your firewall settings.")
                 .build();
-        final ErrorCodeReport report = new ErrorCodeReport("my-project", "1.2.3", List.of(errorMessageDeclaration));
+        final ErrorCodeReport report = new ErrorCodeReport("my-project", "1.2.3",
+                List.of(errorMessageDeclaration1, errorMessageDeclaration2));
         final LoadedReport loadedReport = new LoadedReport(report);
         assertDoesNotThrow(() -> new ErrorCatalogRenderer(TARGET_DIR).render(List.of(loadedReport)));
     }
