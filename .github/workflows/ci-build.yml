@@ -23,6 +23,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Run tests and build with Maven
-        run: mvn -B clean verify --file pom.xml
+        run: mvn -B clean verify sonar:sonar --file pom.xml
         env:
           GITHUB_OAUTH: secrets.GITHUB_TOKEN
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
