@@ -2,13 +2,16 @@
 
 ## Features
 
-* ISSUE_NUMBER: description
+* #5: Added initial implementation
 
 ## Dependency Updates
 
 ### Compile Dependency Updates
 
+* Added `com.exasol:error-code-model-java:0.1.0`
 * Added `com.exasol:error-reporting-java:0.4.0`
+* Added `com.j2html:j2html:1.5.0`
+* Added `org.kohsuke:github-api:1.130`
 
 ### Test Dependency Updates
 
