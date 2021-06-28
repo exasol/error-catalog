@@ -13,7 +13,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
         <junit.version>5.7.0</junit.version>
-        <jacoco.version>0.8.5</jacoco.version>
         <gpg.skip>true</gpg.skip>
         <org.testcontainers.version>1.15.1</org.testcontainers.version>
         <!--
@@ -83,6 +82,26 @@
             <groupId>com.exasol</groupId>
             <artifactId>error-reporting-java</artifactId>
             <version>0.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.exasol</groupId>
+            <artifactId>error-code-model-java</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.j2html</groupId>
+            <artifactId>j2html</artifactId>
+            <version>1.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kohsuke</groupId>
+            <artifactId>github-api</artifactId>
+            <version>1.130</version>
+        </dependency>
+        <dependency>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli</artifactId>
+            <version>4.6.1</version>
         </dependency>
         <!-- test dependencies -->
         <dependency>
@@ -227,12 +246,15 @@
                     <modules>
                         <module>jar_artifact</module>
                     </modules>
+                    <excludedFiles>
+                        <excludedFile>.travis.yml</excludedFile>
+                    </excludedFiles>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.7</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>

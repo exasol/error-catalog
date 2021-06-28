@@ -24,4 +24,5 @@ Scripts
 **/*.log
 .directory
 venv/
+setEnv.sh
 /bin/

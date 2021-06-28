@@ -2,13 +2,17 @@
 
 ## Features
 
-* ISSUE_NUMBER: description
+* #5: Added initial implementation
 
 ## Dependency Updates
 
 ### Compile Dependency Updates
 
+* Added `com.exasol:error-code-model-java:0.1.0`
 * Added `com.exasol:error-reporting-java:0.4.0`
+* Added `com.j2html:j2html:1.5.0`
+* Added `info.picocli:picocli:4.6.1`
+* Added `org.kohsuke:github-api:1.130`
 
 ### Test Dependency Updates
 
@@ -38,6 +42,6 @@
 * Added `org.apache.maven.plugins:maven-source-plugin:3.2.1`
 * Added `org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M3`
 * Added `org.codehaus.mojo:versions-maven-plugin:2.7`
-* Added `org.jacoco:jacoco-maven-plugin:0.8.5`
+* Added `org.jacoco:jacoco-maven-plugin:0.8.7`
 * Added `org.sonatype.ossindex.maven:ossindex-maven-plugin:3.1.0`
 * Added `org.sonatype.plugins:nexus-staging-maven-plugin:1.6.8`

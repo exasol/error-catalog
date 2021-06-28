@@ -31,6 +31,7 @@ Project coverage is the next important factor. The more projects we cover, the m
 Finally the catalog must be able to grow with the covered projects without noticeable performance degradation.
 
 ### User Experience
+
 `qg~user-experience~1`
 
 Users find the error catalog helpful and convenient.
@@ -78,6 +79,7 @@ The following list gives you an overview of terms and abbreviations commonly use
 Features are the highest level requirements in this document that describe the main functionality of ECAT.
 
 ### Error Catalog Collection
+
 `feat~error-catalog-collection~1`
 
 The error catalog scans Exasol software projects for error lists and combines the individual lists into one.
@@ -89,6 +91,7 @@ The main benefit over individual list is that users have a central entry point f
 Needs: req
 
 ### Error Catalog Presentation
+
 `feat~error-catalog-presentation~1`
 
 The error catalog presents the combined error in a central location viewable with any web browser.
@@ -106,6 +109,7 @@ In this section lists functional requirements from the user's perspective. The r
 ### Error Catalog Collection
 
 #### Collecting Error Lists from GitHub Projects
+
 `req~collecting-error-lists-from-github-projects~1`
 
 A crawler collects the error details from all our GitHub repositories daily.
@@ -123,6 +127,7 @@ Needs: dsn
 ### Error Catalog Presentation
 
 #### Content / Design Separation
+
 `req~content-design-separation~1`
 
 Content and design of the error catalog are separated.
@@ -138,6 +143,7 @@ Covers:
 Needs: dsn
 
 #### Corporate Design
+
 `req~corporate-design~1`
 
 The error catalog design matches our corporate design.
@@ -152,7 +158,8 @@ Covers:
 
 Needs: dsn
 
-#### Best Viewed With Any Browser 
+#### Best Viewed With Any Browser
+
 `req~view-with-any-browser~1`
 
 Users can view the error catalog with any browser.
@@ -168,6 +175,7 @@ Covers:
 Needs: dsn
 
 #### Usable Without JavaScript
+
 `req~usable-without-javascript~1`
 
 The error catalog can be used with JavaScript disabled.
@@ -200,6 +208,7 @@ Covers:
 Needs: dsn
 
 #### Catalog Entry Origin Details
+
 `req~catalog-entry-origin-details~1`
 
 Error catalog entries carry introduction date, project and version.
@@ -215,9 +224,10 @@ Covers:
 Needs: dsn
 
 #### Error Details
+
 `req~error-details~1`
 
-Error catalog item contains: code, description, zero or more causes and zero or more mititations 
+Error catalog item contains: code, description, zero or more causes and zero or more mititations
 
 Rationale:
 
@@ -230,6 +240,7 @@ Covers:
 Needs: dsn
 
 #### Projects Entry point
+
 `req~projects-entry-point~1`
 
 The catalog has an entry point where all projects and their short tags are listed together with a link to the corresponding error list.
@@ -245,6 +256,7 @@ Covers:
 Needs: dsn
 
 #### Finding an Entry by Code
+
 `req~finding-an-entry-by-code~1`
 
 Users can find error details by error code.
@@ -264,6 +276,7 @@ Needs: dsn
 ### User Experience
 
 #### Page Overhead Limit
+
 `qs~page-overhead-limit~1`
 
 The pages in the catalog on average have no more than 50% overhead compared to raw text of the error elements.
