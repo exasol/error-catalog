@@ -25,3 +25,4 @@ Scripts
 .directory
 venv/
 setEnv.sh
+/bin/
