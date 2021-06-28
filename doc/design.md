@@ -13,14 +13,14 @@ The error catalog consists of the following main parts:
 
 This documentation will then be transferred to a static web server somewhere.
 
-Both will be implemented in java because of ease of use and setup and will be run as lambdas/serverless functions in AWS with options to run and debug both parts locally as well. 
+Both will be implemented in java because of ease of use and setup and will be run using GitHub actions with options to run and debug both parts locally as well. 
 All steps will run once nightly, in succession, resulting in updated documentation every day.
 
 ## The crawler aka 'collector'
 `dsn~collecting-error-lists-from-github-projects~1`
 
-The crawler will use the Github REST API to crawl the exasol organisation public repositories and find all 'error_code_report.json` files.
-An internal list will be made and these files will then in a following step be transferred to an AWS bucket / filesystem.
+The crawler will use the Github REST API to crawl the Exasol organisation public repositories and find all 'error_code_report.json` files.
+An internal list will be made and these files will then in a following step be downloaded.
 We plan on checking the version tag(s) per repository and if these increase fetch the new json file(s), and store these with the version tag (and possibly a timestamp) appended at the end of the json filenames.
 
 -> TEST suggestion; see for the whole organisation and specify a minimum to compare against.
@@ -80,7 +80,7 @@ Covers:
 
 We will generate an overview page that lists an overview of all the public projects that incorporate the error handling parsers (and generate json files).
 Then per project there will be a listing of all error messages of that project.
-(One repository/project could be generated from multiple json files.)
+(One repository/project could be generated from multiple JSON files.)
 
 Covers:
  * `req~projects-entry-point~1`
@@ -117,6 +117,5 @@ Covers:
 
 Covers:
  * `req~finding-an-entry-by-code~1` 
-
 
 
