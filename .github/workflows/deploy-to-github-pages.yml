@@ -22,8 +22,8 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Run tests and build with Maven
-        run: mvn exec:java
+      - name: Generate catalog
+        run: mvn compile exec:java
         env:
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy 🚀

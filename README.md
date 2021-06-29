@@ -9,7 +9,7 @@ This catalog contains the error codes, descriptions and mitigation information f
 You can use this tool to generate an HTML error code catalog:
 
 * [Configure GitHub credentials / token](https://github-api.kohsuke.org/index.html#Environmental_variables)
-* Run `mvn exec:java`
+* Run `mvn compile exec:java`
 
 Now you can find the catalog in `target/catalog`.
 
