@@ -3,6 +3,7 @@
 ## Features
 
 * #5: Added initial implementation
+* #7: Added GitHub pages deployment
 
 ## Dependency Updates
 

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Exasol's "Error Catalog" (short "ECAT") is a project that collects individual error lists from project repositories and generates a catalog that can be viewed with a web browser.
+Exasol's "Error Catalog" (short "EC") is a project that collects individual error lists from project repositories and generates a catalog that can be viewed with a web browser.
 
 This catalog contains the error codes, descriptions and mitigation information for all scanned projects.
 
@@ -18,7 +18,7 @@ The goal of Exasol's error catalog is to provide a central point where end users
 
 ### Quality Goals
 
-ECAT's main quality goals are in descending order of importance:
+EC's main quality goals are in descending order of importance:
 
 1. User experience
 1. Project coverage
@@ -50,7 +50,7 @@ Needs: qs
 
 ### End Users
 
-End users of ECAT are Exasol users who want to look up the meaning of errors they encounter and what they can do about them.
+End users of EC are Exasol users who want to look up the meaning of errors they encounter and what they can do about them.
 
 ### Project Managers and Requirement Engineers
 
@@ -66,7 +66,7 @@ Quality Engineers validate the process and the outcomes from user requirements t
 
 ## Terms and Abbreviations
 
-The following list gives you an overview of terms and abbreviations commonly used in ECAT documents.
+The following list gives you an overview of terms and abbreviations commonly used in EC documents.
 
 * Cause: The reason for the error.
 * Error code: A well-formatted alphanumeric code with separators where each code uniquely identifies an error.
@@ -76,7 +76,7 @@ The following list gives you an overview of terms and abbreviations commonly use
 
 ## Features
 
-Features are the highest level requirements in this document that describe the main functionality of ECAT.
+Features are the highest level requirements in this document that describe the main functionality of EC.
 
 ### Error Catalog Collection
 
