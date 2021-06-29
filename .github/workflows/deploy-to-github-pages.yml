@@ -31,5 +31,5 @@ jobs:
         with:
           BRANCH: gh-pages
           FOLDER: target/catalog
-          SINGLE_COMMIT: true
+          single-commit: true
           CLEAN: true
