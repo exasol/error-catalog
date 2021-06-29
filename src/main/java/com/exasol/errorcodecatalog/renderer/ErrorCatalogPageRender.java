@@ -8,19 +8,32 @@ import j2html.tags.DomContent;
  * This class renders a page of the error-catalog.
  */
 public class ErrorCatalogPageRender {
+    private final UrlBuilder urlBuilder;
+
+    /**
+     * Create a new instance of {@link ErrorCatalogPageRender}.
+     * 
+     * @param urlBuilder URL builder
+     */
+    public ErrorCatalogPageRender(final UrlBuilder urlBuilder) {
+        this.urlBuilder = urlBuilder;
+    }
+
     /**
      * Render a page of the error-catalog.
      * 
-     * @param title   page title
-     * @param content page content
+     * @param title          page title
+     * @param subfolderDepth count of directories that this page is nested relative to the web root
+     * @param content        page content
      * @return rendered HTML
      */
-    public String render(final String title, final DomContent... content) {
+    public String render(final String title, final int subfolderDepth, final DomContent... content) {
         return html(//
                 title("Exasol Error Catalog – " + title), //
-                head(link().withRel("stylesheet").withHref("../error-catalog-style.css")), //
+                head(link().withRel("stylesheet").withHref("../".repeat(subfolderDepth) + "error-catalog-style.css")), //
                 body(//
-                        div(span("Exasol Error Catalog")).withId("navbar"), //
+                        a(div(span("Exasol Error Catalog")).withId("navbar"))
+                                .withHref("../".repeat(subfolderDepth) + this.urlBuilder.getUrlForFrontPage()), //
                         div(content).withId("mainBox")//
                 )).render();
     }

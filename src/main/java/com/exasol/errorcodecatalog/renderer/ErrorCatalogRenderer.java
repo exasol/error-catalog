@@ -6,16 +6,15 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Stream;
 
-import com.exasol.errorcodecatalog.loader.LoadedReport;
 import com.exasol.errorreporting.ExaError;
-import com.exsol.errorcodemodel.ErrorMessageDeclaration;
+import com.exsol.errorcodemodel.ErrorCodeReport;
 
 /**
  * This class renders the error catalog web site.
  */
 public class ErrorCatalogRenderer {
-    private static final String ERROR_CODES_DIRECTORY = "error-codes";
     private final Path outputDirectory;
+    private final UrlBuilder urlBuilder;
 
     /**
      * Create a new instance of {@link ErrorCatalogRenderer}.
@@ -24,6 +23,7 @@ public class ErrorCatalogRenderer {
      */
     public ErrorCatalogRenderer(final Path outputDirectory) {
         this.outputDirectory = outputDirectory;
+        this.urlBuilder = new UrlBuilder();
     }
 
     /**
@@ -31,12 +31,29 @@ public class ErrorCatalogRenderer {
      * 
      * @param loadedReports error code reports
      */
-    public void render(final List<LoadedReport> loadedReports) {
+    public void render(final List<ErrorCodeReport> loadedReports) {
         deleteTargetDirectory();
         createDirectoryIfNotExists(this.outputDirectory);
         copyResource("error-catalog-style.css");
         copyResource("logo_error_catalog.svg");
-        generateErrorCodePages(loadedReports);
+        final List<Project> projects = Project.groupByProject(loadedReports);
+        generateErrorCodePages(projects);
+        generateProjectsPages(projects);
+        generateFrontPage(projects);
+    }
+
+    private void generateFrontPage(final List<Project> projects) {
+        final FrontPageRenderer frontPageRenderer = new FrontPageRenderer();
+        final Path url = this.urlBuilder.getUrlForFrontPage();
+        writePage(url, frontPageRenderer.render(projects, url.getNameCount() - 1, this.urlBuilder));
+    }
+
+    private void generateProjectsPages(final List<Project> projects) {
+        final ProjectPageRenderer projectPageRenderer = new ProjectPageRenderer(this.urlBuilder);
+        for (final Project project : projects) {
+            final Path pageUrl = this.urlBuilder.getUrlFor(project);
+            writePage(pageUrl, projectPageRenderer.render(project, pageUrl.getNameCount() - 1));
+        }
     }
 
     private void deleteTargetDirectory() {
@@ -70,19 +87,18 @@ public class ErrorCatalogRenderer {
         }
     }
 
-    private void generateErrorCodePages(final List<LoadedReport> loadedReports) {
+    private void generateErrorCodePages(final List<Project> projects) {
         final ErrorCodePageRenderer errorCodePageRenderer = new ErrorCodePageRenderer();
-        createDirectoryIfNotExists(this.outputDirectory.resolve(ERROR_CODES_DIRECTORY));
-        for (final LoadedReport loadedReport : loadedReports) {
-            for (final ErrorMessageDeclaration errorMessageDeclaration : loadedReport.report()
-                    .getErrorMessageDeclarations()) {
-                final String page = errorCodePageRenderer.render(errorMessageDeclaration);
-                writePage(Path.of(ERROR_CODES_DIRECTORY, errorMessageDeclaration.getIdentifier() + ".html"), page);
+        for (final Project project : projects) {
+            for (final ErrorCodeVersions errorCodeVersions : project.getErrorCodes()) {
+                final Path url = this.urlBuilder.getUrlFor(errorCodeVersions);
+                writePage(url, errorCodePageRenderer.render(errorCodeVersions, url.getNameCount() - 1));
             }
         }
     }
 
     private void writePage(final Path fileName, final String page) {
+        createDirectoryIfNotExists(this.outputDirectory.resolve(fileName).getParent());
         try {
             Files.writeString(this.outputDirectory.resolve(fileName), page);
         } catch (final IOException exception) {
