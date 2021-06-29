@@ -41,11 +41,12 @@
 | [Reproducible Build Maven Plugin][46]                   | [Apache 2.0][5]                               |
 | [Apache Maven Assembly Plugin][48]                      | [Apache License, Version 2.0][19]             |
 | [Artifact reference checker and unifier][50]            | [MIT][1]                                      |
-| [Maven Clean Plugin][52]                                | [The Apache Software License, Version 2.0][5] |
-| [Maven Resources Plugin][54]                            | [The Apache Software License, Version 2.0][5] |
-| [Maven JAR Plugin][56]                                  | [The Apache Software License, Version 2.0][5] |
-| [Maven Install Plugin][58]                              | [The Apache Software License, Version 2.0][5] |
-| [Maven Site Plugin 3][60]                               | [The Apache Software License, Version 2.0][5] |
+| [Exec Maven Plugin][52]                                 | [Apache License 2][5]                         |
+| [Maven Clean Plugin][54]                                | [The Apache Software License, Version 2.0][5] |
+| [Maven Resources Plugin][56]                            | [The Apache Software License, Version 2.0][5] |
+| [Maven JAR Plugin][58]                                  | [The Apache Software License, Version 2.0][5] |
+| [Maven Install Plugin][60]                              | [The Apache Software License, Version 2.0][5] |
+| [Maven Site Plugin 3][62]                               | [The Apache Software License, Version 2.0][5] |
 
 [30]: https://github.com/exasol/project-keeper-maven-plugin
 [0]: https://github.com/exasol/error-reporting-java
@@ -53,9 +54,10 @@
 [5]: http://www.apache.org/licenses/LICENSE-2.0.txt
 [18]: https://maven.apache.org/surefire/maven-surefire-plugin/
 [38]: http://www.sonatype.com/public-parent/nexus-maven-plugins/nexus-staging/nexus-staging-maven-plugin/
-[52]: http://maven.apache.org/plugins/maven-clean-plugin/
+[54]: http://maven.apache.org/plugins/maven-clean-plugin/
 [1]: https://opensource.org/licenses/MIT
 [20]: https://maven.apache.org/surefire/maven-failsafe-plugin/
+[52]: http://www.mojohaus.org/exec-maven-plugin
 [24]: http://www.mojohaus.org/versions-maven-plugin/
 [15]: http://opensource.org/licenses/BSD-3-Clause
 [22]: https://maven.apache.org/plugins/maven-compiler-plugin/
@@ -64,22 +66,22 @@
 [39]: http://www.eclipse.org/legal/epl-v10.html
 [32]: https://www.jacoco.org/jacoco/trunk/doc/maven.html
 [46]: http://zlika.github.io/reproducible-build-maven-plugin
-[56]: http://maven.apache.org/plugins/maven-jar-plugin/
+[58]: http://maven.apache.org/plugins/maven-jar-plugin/
 [2]: https://github.com/exasol/error-code-model-java
 [19]: https://www.apache.org/licenses/LICENSE-2.0.txt
 [28]: https://maven.apache.org/enforcer/maven-enforcer-plugin/
 [11]: https://www.eclipse.org/legal/epl-v20.html
 [4]: http://j2html.com
-[58]: http://maven.apache.org/plugins/maven-install-plugin/
+[60]: http://maven.apache.org/plugins/maven-install-plugin/
 [10]: https://junit.org/junit5/
 [26]: https://sonatype.github.io/ossindex-maven/maven-plugin/
 [16]: http://www.jqno.nl/equalsverifier
 [40]: https://maven.apache.org/plugins/maven-source-plugin/
 [14]: http://hamcrest.org/JavaHamcrest/
 [36]: http://maven.apache.org/plugins/maven-deploy-plugin/
-[60]: http://maven.apache.org/plugins/maven-site-plugin/
+[62]: http://maven.apache.org/plugins/maven-site-plugin/
 [6]: https://github-api.kohsuke.org/
-[54]: http://maven.apache.org/plugins/maven-resources-plugin/
+[56]: http://maven.apache.org/plugins/maven-resources-plugin/
 [42]: https://maven.apache.org/plugins/maven-javadoc-plugin/
 [44]: https://github.com/exasol/error-code-crawler-maven-plugin
 [50]: https://github.com/exasol/artifact-reference-checker-maven-plugin
