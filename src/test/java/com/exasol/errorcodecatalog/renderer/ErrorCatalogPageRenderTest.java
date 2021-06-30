@@ -2,15 +2,31 @@ package com.exasol.errorcodecatalog.renderer;
 
 import static j2html.TagCreator.h1;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class ErrorCatalogPageRenderTest {
+    private static final ErrorCatalogPageRender RENDER = new ErrorCatalogPageRender(new UrlBuilder());
+
     @Test
-    void test() {
-        final String result = new ErrorCatalogPageRender().render("My Page", h1("Test"));
+    void testGeneration() {
+        final String result = RENDER.render("My Page", 1, h1("Test"));
         assertThat(result, equalTo(
-                "<html><title>Exasol Error Catalog – My Page</title><head><link rel=\"stylesheet\" href=\"../error-catalog-style.css\"></head><body><div id=\"navbar\"><span>Exasol Error Catalog</span></div><div id=\"mainBox\"><h1>Test</h1></div></body></html>"));
+                "<html><title>Exasol Error Catalog – My Page</title><head><link rel=\"stylesheet\" href=\"../error-catalog-style.css\"></head><body><a href=\"../index.html\"><div id=\"navbar\"><span>Exasol Error Catalog</span></div></a><div id=\"mainBox\"><h1>Test</h1></div></body></html>"));
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = { //
+            "0, \"error-catalog-style.css", //
+            "1, \"../error-catalog-style.css", //
+            "2, \"../../error-catalog-style.css",//
+    })
+    void testSubfolderDepth(final int depth, final String expectedString) {
+        final String result = RENDER.render("My Page", depth, h1("Test"));
+        assertThat(result, containsString(expectedString));
     }
 }

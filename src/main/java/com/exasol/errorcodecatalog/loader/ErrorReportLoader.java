@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import com.exasol.errorcodecatalog.collector.ReleasedErrorCodeReport;
 import com.exasol.errorreporting.ExaError;
+import com.exsol.errorcodemodel.ErrorCodeReport;
 import com.exsol.errorcodemodel.ErrorCodeReportReader;
 
 /**
@@ -20,12 +21,11 @@ public class ErrorReportLoader {
      * @param releasedReports released reports
      * @return loaded reports
      */
-    public List<LoadedReport> loadReports(final List<ReleasedErrorCodeReport> releasedReports) {
-        final List<LoadedReport> loadedReports = new ArrayList<>();
+    public List<ErrorCodeReport> loadReports(final List<ReleasedErrorCodeReport> releasedReports) {
+        final List<ErrorCodeReport> loadedReports = new ArrayList<>();
         for (final ReleasedErrorCodeReport releasedReport : releasedReports) {
             try {
-                loadedReports.add(
-                        new LoadedReport(new ErrorCodeReportReader().readReport(releasedReport.errorCodeReport())));
+                loadedReports.add(new ErrorCodeReportReader().readReport(releasedReport.errorCodeReport()));
             } catch (final ErrorCodeReportReader.ReadException exception) {
                 LOGGER.severe(ExaError.messageBuilder("E-EC-4").message(
                         "Failed to parse error-code-report of {{repository name}} {{version}}. Case: {{cause|uq}}",

@@ -6,8 +6,8 @@ import java.util.List;
 import com.exasol.errorcodecatalog.collector.ErrorReportCollector;
 import com.exasol.errorcodecatalog.collector.ReleasedErrorCodeReport;
 import com.exasol.errorcodecatalog.loader.ErrorReportLoader;
-import com.exasol.errorcodecatalog.loader.LoadedReport;
 import com.exasol.errorcodecatalog.renderer.ErrorCatalogRenderer;
+import com.exsol.errorcodemodel.ErrorCodeReport;
 
 import picocli.CommandLine;
 
@@ -43,7 +43,7 @@ public class ErrorCatalog implements Runnable {
     public void run() {
         final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(Path.of(this.reportRepo))
                 .collectReports();
-        final List<LoadedReport> loadedReports = new ErrorReportLoader().loadReports(reports);
+        final List<ErrorCodeReport> loadedReports = new ErrorReportLoader().loadReports(reports);
         new ErrorCatalogRenderer(Path.of(this.outputDirectory)).render(loadedReports);
     }
 }

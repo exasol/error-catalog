@@ -4,6 +4,7 @@
 
 * #5: Added initial implementation
 * #7: Added GitHub pages deployment
+* #8: Added project pages
 
 ## Dependency Updates
 

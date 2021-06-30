@@ -20,10 +20,13 @@ class ErrorCodePageRenderer {
     /**
      * Render a catalog page for an error-code.
      * 
-     * @param errorMessageDeclaration error message declaration to render the page for
+     * @param errorCodeVersions all versions of the error code
+     * @param subfolderDepth    count of directories that this page is nested relative to the web root
      * @return rendered HTML page
      */
-    String render(final ErrorMessageDeclaration errorMessageDeclaration) {
+    String render(final ErrorCodeVersions errorCodeVersions, final int subfolderDepth) {
+        final ErrorMessageDeclaration errorMessageDeclaration = errorCodeVersions
+                .getVersion(errorCodeVersions.getLatestVersionNumber());
         final List<DomContent> htmlElements = new ArrayList<>();
         htmlElements.add(h1(errorMessageDeclaration.getIdentifier()));
         htmlElements.add(h4("Message"));
@@ -35,8 +38,8 @@ class ErrorCodePageRenderer {
 
         addPlaceholdersSection(htmlElements, placeholderNumberProvider, errorMessageDeclaration.getNamedParameters());
 
-        return new ErrorCatalogPageRender().render(errorMessageDeclaration.getIdentifier(),
-                htmlElements.toArray(DomContent[]::new));
+        return new ErrorCatalogPageRender(new UrlBuilder()).render(errorMessageDeclaration.getIdentifier(),
+                subfolderDepth, htmlElements.toArray(DomContent[]::new));
     }
 
     private void addPlaceholdersSection(final List<DomContent> htmlElements,
@@ -57,7 +60,7 @@ class ErrorCodePageRenderer {
 
     private boolean existsPlaceholderWithDescription(final List<NamedParameter> namedParameters) {
         return namedParameters.stream().anyMatch(
-                placeholder -> placeholder.getDescription() != null || placeholder.getDescription().isBlank());
+                placeholder -> placeholder.getDescription() != null && !placeholder.getDescription().isBlank());
     }
 
     private DomContent getPlaceholderDescription(final NamedParameter placeholder) {

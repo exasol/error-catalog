@@ -2,9 +2,13 @@
 
 Exasol's "Error Catalog" (short "EC") is a project that collects individual error lists from project repositories and generates a catalog that can be viewed with a web browser.
 
+**You can view it at the [exasol error-catalog web site](https://exasol.github.io/error-catalog/).**
+
 This catalog contains the error codes, descriptions and mitigation information for all scanned projects.
 
 ## Local Usage
+
+Usually there is no need to generate the catalog. Instead, you can simply use the [online version](https://exasol.github.io/error-catalog/).
 
 You can use this tool to generate an HTML error code catalog:
 

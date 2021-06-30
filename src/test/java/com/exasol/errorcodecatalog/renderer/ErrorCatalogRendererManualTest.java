@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.exasol.errorcodecatalog.loader.LoadedReport;
 import com.exsol.errorcodemodel.ErrorCodeReport;
 import com.exsol.errorcodemodel.ErrorMessageDeclaration;
 
@@ -30,9 +29,9 @@ class ErrorCatalogRendererManualTest {
                 .identifier("F-TEST-2").prependMessage("Download of {{url}} failed.")
                 .appendMitigation("Check your internet connection.").appendMitigation("Check your firewall settings.")
                 .build();
-        final ErrorCodeReport report = new ErrorCodeReport("my-project", "1.2.3",
+        final ErrorCodeReport report = new ErrorCodeReport("my-project", "1.2.3", List.of(errorMessageDeclaration1));
+        final ErrorCodeReport olderReport = new ErrorCodeReport("my-project", "1.2.0",
                 List.of(errorMessageDeclaration1, errorMessageDeclaration2));
-        final LoadedReport loadedReport = new LoadedReport(report);
-        assertDoesNotThrow(() -> new ErrorCatalogRenderer(TARGET_DIR).render(List.of(loadedReport)));
+        assertDoesNotThrow(() -> new ErrorCatalogRenderer(TARGET_DIR).render(List.of(report, olderReport)));
     }
 }
