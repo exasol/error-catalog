@@ -5,6 +5,7 @@
 * #5: Added initial implementation
 * #7: Added GitHub pages deployment
 * #8: Added project pages
+* #9: Added fonts locally
 
 ## Dependency Updates
 

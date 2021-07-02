@@ -36,6 +36,9 @@ public class ErrorCatalogRenderer {
         createDirectoryIfNotExists(this.outputDirectory);
         copyResource("error-catalog-style.css");
         copyResource("logo_error_catalog.svg");
+        copyResource("Inter-Bold.woff");
+        copyResource("Inter-Italic.woff");
+        copyResource("Inter-Regular.woff");
         final List<Project> projects = Project.groupByProject(loadedReports);
         generateErrorCodePages(projects);
         generateProjectsPages(projects);

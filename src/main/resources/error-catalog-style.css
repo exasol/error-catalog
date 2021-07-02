@@ -1,44 +1,66 @@
-    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Inter Regular'), url('Inter-Regular.woff') format('woff');
+}
 
-    #navbar{
-        position: fixed;
-        display:block;
-        height: 60px;
-        background: red;
-        margin:0;
-        top:0;
-        left:0;
-        background: #122D4E;
-        width : 100%;
-        color: #fff;
-    }
 
-    #navbar span{
-        background: url("logo_error_catalog.svg") no-repeat left/contain;
-        display: block;
-        font: 0/0 a;
-        height: 40px;
-        width: 300px;
-        margin-left: 200px;
-        margin-top: 10px;
-    }
+@font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Inter Italic'), url('Inter-Italic.woff') format('woff');
+}
 
-    #mainBox{
-        margin-top: 180px;
-        font-family: Inter;
-        margin-left: 200px;
-        max-width: 1000px;
-    }
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Inter Bold'), url('Inter-Bold.woff') format('woff');
+}
 
-    h1, h2{
-        color: #122D4E;
-    }
 
-    .code{
-        background: #eee;
-        padding: 15px;
-        font-family: Courier New;
-    }
+
+#navbar{
+    position: fixed;
+    display:block;
+    height: 60px;
+    background: red;
+    margin:0;
+    top:0;
+    left:0;
+    background: #122D4E;
+    width : 100%;
+    color: #fff;
+}
+
+#navbar span{
+    background: url("logo_error_catalog.svg") no-repeat left/contain;
+    display: block;
+    font: 0/0 a;
+    height: 40px;
+    width: 300px;
+    margin-left: 200px;
+    margin-top: 10px;
+}
+
+#mainBox{
+    margin-top: 180px;
+    font-family: Inter;
+    margin-left: 200px;
+    max-width: 1000px;
+}
+
+h1, h2{
+    color: #122D4E;
+}
+
+.code{
+    background: #eee;
+    padding: 15px;
+    font-family: Courier New;
+}
 
  .param{
       padding:4px;
