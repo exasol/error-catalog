@@ -24,5 +24,5 @@ Now you can find the catalog in `target/catalog`.
 ## Information For Developers
 
 * [System Requirements](doc/system_requirements.md)
-  [Design Document](doc/design.md)
+* [Design Document](doc/design.md)
 * [Dependencies](dependencies.md)
