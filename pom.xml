@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>error-catalog</artifactId>
-    <version>0.2.0</version>
+    <version>0.1.0</version>
     <name>Exasol Error Catalog</name>
     <description>Tooling for crawling all error codes and generating a online error catalog.</description>
     <url>https://github.com/exasol/error-catalog</url>
@@ -247,7 +247,7 @@
                         <module>jar_artifact</module>
                     </modules>
                     <excludedFiles>
-                        <excludedFile>.travis.yml</excludedFile>
+                        <excludedFile>.github/workflows/ci-build-next-java.yml</excludedFile>
                     </excludedFiles>
                 </configuration>
             </plugin>
