@@ -10,7 +10,7 @@ public final class ReleasedErrorCodeReport {
     private final String projectName;
     private final String projectVersion;
 
-    ReleasedErrorCodeReport(final Path errorCodeReport, final String projectName, final String projectVersion) {
+    public ReleasedErrorCodeReport(final Path errorCodeReport, final String projectName, final String projectVersion) {
         this.errorCodeReport = errorCodeReport;
         this.projectName = projectName;
         this.projectVersion = projectVersion;
