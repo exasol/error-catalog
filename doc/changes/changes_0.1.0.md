@@ -48,5 +48,6 @@
 * Added `org.codehaus.mojo:exec-maven-plugin:3.0.0`
 * Added `org.codehaus.mojo:versions-maven-plugin:2.7`
 * Added `org.jacoco:jacoco-maven-plugin:0.8.7`
+* Added `org.projectlombok:lombok-maven-plugin:1.18.20.0`
 * Added `org.sonatype.ossindex.maven:ossindex-maven-plugin:3.1.0`
 * Added `org.sonatype.plugins:nexus-staging-maven-plugin:1.6.8`

@@ -2,9 +2,17 @@ package com.exasol.errorcodecatalog.renderer;
 
 import java.util.Arrays;
 
+/**
+ * This class represents a version number.
+ */
 public class ProjectVersion implements Comparable<ProjectVersion> {
     private final String[] parts;
 
+    /**
+     * Create a nwq instance of {@link ProjectVersion}.
+     *
+     * @param semanticVersion version number
+     */
     public ProjectVersion(final String semanticVersion) {
         this.parts = semanticVersion.split("\\.");
     }

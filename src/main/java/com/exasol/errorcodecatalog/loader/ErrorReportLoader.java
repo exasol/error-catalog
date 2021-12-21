@@ -31,7 +31,7 @@ public class ErrorReportLoader {
             } catch (final ErrorCodeReportReader.ReadException exception) {
                 LOGGER.severe(ExaError.messageBuilder("E-EC-4").message(
                         "Failed to parse error-code-report of {{repository name}} {{version}}. Case: {{cause|uq}}",
-                        releasedReport.projectName(), releasedReport.projectVersion(), exception.getMessage())
+                        releasedReport.getProjectName(), releasedReport.getProjectVersion(), exception.getMessage())
                         .toString());
             }
         }

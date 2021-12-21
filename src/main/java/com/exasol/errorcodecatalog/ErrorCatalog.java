@@ -31,6 +31,11 @@ public class ErrorCatalog implements Runnable {
             "--output-directory" }, required = true, description = "Directory were the website will be written to.")
     private String outputDirectory;
 
+    /**
+     * Entry point.
+     * 
+     * @param arguments command line arguments
+     */
     public static void main(final String[] arguments) {
         final CommandLine commandLineClient = new CommandLine(new ErrorCatalog());
         final int exitCode = commandLineClient.execute(arguments);

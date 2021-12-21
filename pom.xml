@@ -128,6 +128,12 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <artifactId>lombok</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <version>1.18.20</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -245,6 +251,7 @@
                 <configuration>
                     <modules>
                         <module>jar_artifact</module>
+                        <module>lombok</module>
                     </modules>
                     <excludedFiles>
                         <excludedFile>.github/workflows/ci-build-next-java.yml</excludedFile>
@@ -388,6 +395,12 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <sourcePaths>
+                        <sourcePath>target/delombok/main</sourcePath>
+                        <sourcePath>target/delombok/test</sourcePath>
+                    </sourcePaths>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>io.github.zlika</groupId>
@@ -453,6 +466,37 @@
                     <execution>
                         <id>default-jar</id>
                         <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-maven-plugin</artifactId>
+                <version>1.18.20.0</version>
+                <executions>
+                    <execution>
+                        <id>delombok-main</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>delombok</goal>
+                        </goals>
+                        <configuration>
+                            <addOutputDirectory>false</addOutputDirectory>
+                            <sourceDirectory>src/main/java</sourceDirectory>
+                            <outputDirectory>target/delombok/main</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>delombok-test</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>testDelombok</goal>
+                        </goals>
+                        <configuration>
+                            <addOutputDirectory>false</addOutputDirectory>
+                            <sourceDirectory>src/test/java</sourceDirectory>
+                            <outputDirectory>target/delombok/test</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

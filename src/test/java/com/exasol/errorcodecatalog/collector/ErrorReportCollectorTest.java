@@ -16,10 +16,10 @@ class ErrorReportCollectorTest {
     void test(@TempDir final Path tempDir) throws IOException {
         final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(tempDir).collectReports();
         final ReleasedErrorCodeReport errorCodeReport = reports.stream()
-                .filter(report -> report.projectName().equals("error-code-crawler-maven-plugin")
-                        && report.projectVersion().equals("0.5.0"))
+                .filter(report -> report.getProjectName().equals("error-code-crawler-maven-plugin")
+                        && report.getProjectVersion().equals("0.5.0"))
                 .findAny().orElseThrow();
-        assertThat(Files.readString(errorCodeReport.errorCodeReport()),
+        assertThat(Files.readString(errorCodeReport.getErrorCodeReport()),
                 containsString("error-code-crawler-maven-plugin"));
     }
 }
