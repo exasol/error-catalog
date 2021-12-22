@@ -12,9 +12,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class ErrorReportCollectorTest {
+    private static final GithubToken GITHUB_TOKEN = new GithubTokenReader().readTokenFromEnv();
+
     @Test
     void test(@TempDir final Path tempDir) throws IOException {
-        final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(tempDir).collectReports();
+        final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(tempDir, GITHUB_TOKEN).collectReports();
         final ReleasedErrorCodeReport errorCodeReport = reports.stream()
                 .filter(report -> report.getProjectName().equals("error-code-crawler-maven-plugin")
                         && report.getProjectVersion().equals("0.5.0"))

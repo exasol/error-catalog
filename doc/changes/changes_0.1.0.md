@@ -16,7 +16,6 @@
 * Added `com.exasol:error-reporting-java:0.4.1`
 * Added `com.j2html:j2html:1.5.0`
 * Added `info.picocli:picocli:4.6.2`
-* Added `org.kohsuke:github-api:1.301`
 
 ### Test Dependency Updates
 

@@ -1,0 +1,26 @@
+query {
+  repository(owner: "exasol", name: $project$){
+    releases(first: 100, after: $cursor$){
+      edges{
+        node{
+          isDraft
+          tag{
+           name
+          }
+          releaseAssets(first: 1, name: "error_code_report.json"){
+            edges{
+              node{
+                name,
+                url
+              }
+            }
+          }
+        }
+      },
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+}

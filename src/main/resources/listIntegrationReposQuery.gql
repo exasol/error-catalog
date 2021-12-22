@@ -1,0 +1,16 @@
+query {
+  search(query: "org:exasol topic:exasol-integration", type: REPOSITORY, first: 100, after: $cursor$){
+    edges{
+      node{
+        ... on Repository{
+          name,
+          isPrivate
+        }
+      }
+    },
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

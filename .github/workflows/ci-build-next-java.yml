@@ -31,7 +31,6 @@ jobs:
           mvn --batch-mode --update-snapshots clean package -DtrimStackTrace=false \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
         env:
-          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish Test Report
         uses: scacap/action-surefire-report@v1

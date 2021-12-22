@@ -94,11 +94,6 @@
             <version>1.5.0</version>
         </dependency>
         <dependency>
-            <groupId>org.kohsuke</groupId>
-            <artifactId>github-api</artifactId>
-            <version>1.301</version>
-        </dependency>
-        <dependency>
             <groupId>info.picocli</groupId>
             <artifactId>picocli</artifactId>
             <version>4.6.2</version>
@@ -256,6 +251,11 @@
                     <excludedFiles>
                         <excludedFile>.github/workflows/ci-build-next-java.yml</excludedFile>
                     </excludedFiles>
+                    <linkReplacements>
+                        <linkReplacement>
+                            https://awhitford.github.com/lombok.maven/lombok-maven-plugin/|http://anthonywhitford.com/lombok.maven/lombok-maven-plugin/
+                        </linkReplacement>
+                    </linkReplacements>
                 </configuration>
             </plugin>
             <plugin>
