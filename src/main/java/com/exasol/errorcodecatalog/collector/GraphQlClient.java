@@ -18,6 +18,7 @@ import lombok.Getter;
  */
 public class GraphQlClient {
     private static final String EDGES = "edges";
+    private static final String ERRORS = "errors";
     private final int pageSize;
     private final GithubToken githubToken;
     private final HttpClient httpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1)
@@ -28,7 +29,7 @@ public class GraphQlClient {
      *
      * @param githubToken GitHub token
      */
-    public GraphQlClient(GithubToken githubToken) {
+    public GraphQlClient(final GithubToken githubToken) {
         this(githubToken, 100);
     }
 
@@ -38,12 +39,12 @@ public class GraphQlClient {
      * @param githubToken GitHub token
      * @param pageSize    page size of the requests
      */
-    GraphQlClient(GithubToken githubToken, int pageSize) {
+    GraphQlClient(final GithubToken githubToken, final int pageSize) {
         this.githubToken = githubToken;
         this.pageSize = pageSize;
     }
 
-    private static String quote(String nextPage) {
+    private static String quote(final String nextPage) {
         if (nextPage.contains("\"")) {
             throw new IllegalStateException(ExaError.messageBuilder("F-EC-15")
                     .message("String contained illegal char \".").ticketMitigation().toString());
@@ -58,17 +59,17 @@ public class GraphQlClient {
      */
     public List<String> listExasolIntegrationRepos() {
         final List<String> result = new ArrayList<>();
-        Paginator paginator = new Paginator();
+        final Paginator paginator = new Paginator();
         while (paginator.isHasNextPage()) {
             final String queryTemplate = getResourceAsString("listIntegrationReposQuery.gql");
             final String query = queryTemplate.replace("$cursor$", paginator.nextCursor()).replace("$pageSize$",
-                    String.valueOf(pageSize));
+                    String.valueOf(this.pageSize));
             final JsonObject response = runGraphQlQuery(query);
             try {
                 final JsonObject search = response.getJsonObject("search");
                 paginator.update(search.getJsonObject("pageInfo"));
                 result.addAll(readReposFromPage(search));
-            } catch (NullPointerException exception) {
+            } catch (final NullPointerException exception) {
                 throw new IllegalStateException(
                         ExaError.messageBuilder("E-EC-16").message("Failed to parse GitHub response.").toString(),
                         exception);
@@ -77,12 +78,12 @@ public class GraphQlClient {
         return result;
     }
 
-    private List<String> readReposFromPage(JsonObject search) {
+    private List<String> readReposFromPage(final JsonObject search) {
         final List<String> result = new ArrayList<>();
-        for (JsonValue edge : search.getJsonArray(EDGES)) {
+        for (final JsonValue edge : search.getJsonArray(EDGES)) {
             final JsonObject repo = edge.asJsonObject().getJsonObject("node");
             if (!repo.getBoolean("isPrivate")) {
-                String name = repo.getString("name");
+                final String name = repo.getString("name");
                 result.add(name);
             }
         }
@@ -95,7 +96,7 @@ public class GraphQlClient {
      * @param repository repository name in the Exasol organisation
      * @return released reports
      */
-    public List<ReleaseReference> getReleaseArtifact(String repository) {
+    public List<ReleaseReference> getReleaseArtifact(final String repository) {
         final List<ReleaseReference> result = new ArrayList<>();
         final Paginator paginator = new Paginator();
         while (paginator.isHasNextPage()) {
@@ -105,7 +106,7 @@ public class GraphQlClient {
                 final JsonObject releases = response.getJsonObject("repository").getJsonObject("releases");
                 paginator.update(releases.getJsonObject("pageInfo"));
                 result.addAll(readReleasesPage(repository, releases));
-            } catch (NullPointerException | ClassCastException exception) {
+            } catch (final NullPointerException | ClassCastException exception) {
                 throw new IllegalStateException(
                         ExaError.messageBuilder("E-EC-14").message("Failed to parse GitHub response.").toString(),
                         exception);
@@ -114,15 +115,15 @@ public class GraphQlClient {
         return result;
     }
 
-    private String getReleaseArtifactQuery(String repository, Paginator paginator) {
+    private String getReleaseArtifactQuery(final String repository, final Paginator paginator) {
         final String queryTemplate = getResourceAsString("releaseArtifactsQuery.gql");
         return queryTemplate.replace("$cursor$", paginator.nextCursor()).replace("$project$", quote(repository))
-                .replace("$pageSize$", String.valueOf(pageSize));
+                .replace("$pageSize$", String.valueOf(this.pageSize));
     }
 
-    private List<ReleaseReference> readReleasesPage(String repository, JsonObject releases) {
+    private List<ReleaseReference> readReleasesPage(final String repository, final JsonObject releases) {
         final List<ReleaseReference> result = new ArrayList<>();
-        for (JsonValue edge : releases.getJsonArray(EDGES)) {
+        for (final JsonValue edge : releases.getJsonArray(EDGES)) {
             final JsonObject release = edge.asJsonObject().getJsonObject("node");
             if (!release.getBoolean("isDraft")) {
                 final JsonArray assetEdges = release.getJsonObject("releaseAssets").getJsonArray(EDGES);
@@ -136,27 +137,39 @@ public class GraphQlClient {
         return result;
     }
 
-    private String getResourceAsString(String resourceName) {
+    private String getResourceAsString(final String resourceName) {
         try (final InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(resourceName)) {
             return new String(Objects.requireNonNull(resourceAsStream).readAllBytes(), StandardCharsets.UTF_8);
-        } catch (IOException exception) {
+        } catch (final IOException exception) {
             throw new IllegalStateException(ExaError.messageBuilder("F-EC-10")
                     .message("Failed to get resource {{resource}}.", resourceName).ticketMitigation().toString(),
                     exception);
         }
     }
 
-    private JsonObject runGraphQlQuery(String query) {
+    /**
+     * Run a graphql query.
+     * 
+     * @param query query
+     * @return result as JSON
+     */
+    JsonObject runGraphQlQuery(final String query) {
         try {
             final byte[] requestBody = createRequestBody(query);
-            HttpRequest request = createHttpRequest(requestBody);
-            final HttpResponse<InputStream> response = httpClient.send(request,
+            final HttpRequest request = createHttpRequest(requestBody);
+            final HttpResponse<InputStream> response = this.httpClient.send(request,
                     HttpResponse.BodyHandlers.ofInputStream());
-            return parseResponse(response);
-        } catch (IOException exception) {
+            final JsonObject responseJson = parseResponse(response);
+            if (responseJson.containsKey(ERRORS) && !responseJson.isNull(ERRORS)) {
+                final String errorMessage = new String(toJson(responseJson.get(ERRORS)), StandardCharsets.UTF_8);
+                throw new IllegalStateException(ExaError.messageBuilder("E-EC-17")
+                        .message("Graphql query returned error: {{error}}.", errorMessage).toString());
+            }
+            return responseJson.getJsonObject("data");
+        } catch (final IOException exception) {
             throw new IllegalStateException(
                     ExaError.messageBuilder("E-EC-11").message("Failed to run graphql query.").toString(), exception);
-        } catch (InterruptedException exception) {
+        } catch (final InterruptedException exception) {
             Thread.currentThread().interrupt();
             throw new IllegalStateException(
                     ExaError.messageBuilder("E-EC-12").message("Interrupted while running graphql query.").toString(),
@@ -164,35 +177,35 @@ public class GraphQlClient {
         }
     }
 
-    private HttpRequest createHttpRequest(byte[] requestBody) {
+    private HttpRequest createHttpRequest(final byte[] requestBody) {
         final HttpRequest.BodyPublisher publisher = HttpRequest.BodyPublishers.ofByteArray(requestBody);
         return HttpRequest.newBuilder().POST(publisher).uri(URI.create("https://api.github.com/graphql"))
-                .setHeader("User-Agent", "error catalog").setHeader("Authorization", "bearer " + githubToken.getToken())
-                .build();
+                .setHeader("User-Agent", "error catalog")
+                .setHeader("Authorization", "bearer " + this.githubToken.getToken()).build();
     }
 
-    private byte[] createRequestBody(String query) {
+    private byte[] createRequestBody(final String query) {
         final JsonObjectBuilder requestBuilder = Json.createObjectBuilder();
         requestBuilder.add("query", query);
         final JsonObject requestJson = requestBuilder.build();
         return toJson(requestJson);
     }
 
-    private JsonObject parseResponse(HttpResponse<InputStream> response) throws IOException {
+    private JsonObject parseResponse(final HttpResponse<InputStream> response) throws IOException {
         try (final InputStream inputStream = response.body();
                 final JsonReader jsonReader = Json.createReader(inputStream)) {
             final JsonObject responseJson = jsonReader.readObject();
-            return responseJson.getJsonObject("data");
+            return responseJson;
         }
     }
 
-    private byte[] toJson(JsonObject requestJson) {
+    private byte[] toJson(final JsonValue requestJson) {
         try (final ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
             try (final JsonWriter writer = Json.createWriter(buffer)) {
                 writer.write(requestJson);
             }
             return buffer.toByteArray();
-        } catch (IOException exception) {
+        } catch (final IOException exception) {
             throw new UncheckedIOException(
                     ExaError.messageBuilder("F-EC-13").message("Exception while serializing to JSON.").toString(),
                     exception);
@@ -204,18 +217,18 @@ public class GraphQlClient {
         private boolean hasNextPage = true;
         private String nextPage = null;
 
-        private void update(JsonObject pageInfo) {
-            hasNextPage = pageInfo.getBoolean("hasNextPage");
-            if (hasNextPage) {
-                nextPage = pageInfo.getString("endCursor");
+        private void update(final JsonObject pageInfo) {
+            this.hasNextPage = pageInfo.getBoolean("hasNextPage");
+            if (this.hasNextPage) {
+                this.nextPage = pageInfo.getString("endCursor");
             }
         }
 
         private String nextCursor() {
-            if (nextPage == null) {
+            if (this.nextPage == null) {
                 return "null";
             } else {
-                return quote(nextPage);
+                return quote(this.nextPage);
             }
         }
     }
