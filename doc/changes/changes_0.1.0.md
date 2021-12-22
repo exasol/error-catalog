@@ -39,7 +39,7 @@
 * Added `org.apache.maven.plugins:maven-gpg-plugin:1.6`
 * Added `org.apache.maven.plugins:maven-install-plugin:2.4`
 * Added `org.apache.maven.plugins:maven-jar-plugin:3.2.0`
-* Added `org.apache.maven.plugins:maven-javadoc-plugin:3.2.0`
+* Added `org.apache.maven.plugins:maven-javadoc-plugin:3.3.1`
 * Added `org.apache.maven.plugins:maven-resources-plugin:2.6`
 * Added `org.apache.maven.plugins:maven-site-plugin:3.3`
 * Added `org.apache.maven.plugins:maven-source-plugin:3.2.1`
