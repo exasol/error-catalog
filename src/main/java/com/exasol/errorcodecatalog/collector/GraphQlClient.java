@@ -18,17 +18,29 @@ import lombok.Getter;
  */
 public class GraphQlClient {
     private static final String EDGES = "edges";
+    private final int pageSize;
     private final GithubToken githubToken;
     private final HttpClient httpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1)
             .connectTimeout(Duration.ofSeconds(10)).build();
 
     /**
      * Create a new instance of {@link GraphQlClient}.
-     * 
+     *
      * @param githubToken GitHub token
      */
     public GraphQlClient(GithubToken githubToken) {
+        this(githubToken, 100);
+    }
+
+    /**
+     * Create a new instance of {@link GraphQlClient}.
+     *
+     * @param githubToken GitHub token
+     * @param pageSize    page size of the requests
+     */
+    GraphQlClient(GithubToken githubToken, int pageSize) {
         this.githubToken = githubToken;
+        this.pageSize = pageSize;
     }
 
     private static String quote(String nextPage) {
@@ -49,7 +61,8 @@ public class GraphQlClient {
         Paginator paginator = new Paginator();
         while (paginator.isHasNextPage()) {
             final String queryTemplate = getResourceAsString("listIntegrationReposQuery.gql");
-            final String query = queryTemplate.replace("$cursor$", paginator.nextCursor());
+            final String query = queryTemplate.replace("$cursor$", paginator.nextCursor()).replace("$pageSize$",
+                    String.valueOf(pageSize));
             final JsonObject response = runGraphQlQuery(query);
             try {
                 final JsonObject search = response.getJsonObject("search");
@@ -103,7 +116,8 @@ public class GraphQlClient {
 
     private String getReleaseArtifactQuery(String repository, Paginator paginator) {
         final String queryTemplate = getResourceAsString("releaseArtifactsQuery.gql");
-        return queryTemplate.replace("$cursor$", paginator.nextCursor()).replace("$project$", quote(repository));
+        return queryTemplate.replace("$cursor$", paginator.nextCursor()).replace("$project$", quote(repository))
+                .replace("$pageSize$", String.valueOf(pageSize));
     }
 
     private List<ReleaseReference> readReleasesPage(String repository, JsonObject releases) {

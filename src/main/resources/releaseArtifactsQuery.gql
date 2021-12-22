@@ -1,6 +1,6 @@
 query {
   repository(owner: "exasol", name: $project$){
-    releases(first: 100, after: $cursor$){
+    releases(first: $pageSize$, after: $cursor$){
       edges{
         node{
           isDraft

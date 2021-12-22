@@ -14,17 +14,14 @@ import com.exasol.errorreporting.ExaError;
  */
 class ErrorReportDownloader {
     private final Path localRepo;
-    private final GithubToken token;
 
     /**
      * Create a new instance of {@link ErrorReportDownloader}.
      *
      * @param localRepo target directory for the error-code report files.
-     * @param token     github token
      */
-    ErrorReportDownloader(final Path localRepo, GithubToken token) {
+    ErrorReportDownloader(final Path localRepo) {
         this.localRepo = localRepo;
-        this.token = token;
         createLocalRepoIfNotExists();
     }
 

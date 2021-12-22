@@ -13,13 +13,13 @@ class GraphQlClientTest {
 
     @Test
     void testListRepos() {
-        final List<String> result = new GraphQlClient(GITHUB_TOKEN).listExasolIntegrationRepos();
+        final List<String> result = new GraphQlClient(GITHUB_TOKEN, 10).listExasolIntegrationRepos();
         assertThat(result, hasItem("error-catalog"));
     }
 
     @Test
     void testGetReleaseArtifact() {
-        final List<ReleaseReference> result = new GraphQlClient(GITHUB_TOKEN)
+        final List<ReleaseReference> result = new GraphQlClient(GITHUB_TOKEN, 2)
                 .getReleaseArtifact("s3-document-files-virtual-schema");
         final ReleaseReference s3Release = result.stream()
                 .filter(release -> release.getRepository().equals("s3-document-files-virtual-schema")

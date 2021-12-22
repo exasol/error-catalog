@@ -29,7 +29,7 @@ public class ErrorReportCollector {
      */
     public List<ReleasedErrorCodeReport> collectReports() {
         final List<ReleaseReference> releases = new ErrorReportFinder(githubToken).findErrorReports();
-        final ErrorReportDownloader downloader = new ErrorReportDownloader(this.localRepository, githubToken);
+        final ErrorReportDownloader downloader = new ErrorReportDownloader(this.localRepository);
         final List<ReleasedErrorCodeReport> releasedReports = new ArrayList<>();
         for (final ReleaseReference release : releases) {
             final Path report = downloader.downloadReportIfNotExists(release);
