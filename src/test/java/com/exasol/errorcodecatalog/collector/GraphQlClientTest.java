@@ -13,7 +13,7 @@ class GraphQlClientTest {
 
     @Test
     void testListRepos() {
-        final List<String> result = new GraphQlClient(GITHUB_TOKEN).listRepos();
+        final List<String> result = new GraphQlClient(GITHUB_TOKEN).listExasolIntegrationRepos();
         assertThat(result, hasItem("error-catalog"));
     }
 

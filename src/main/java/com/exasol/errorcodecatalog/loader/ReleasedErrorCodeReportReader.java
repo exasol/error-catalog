@@ -13,7 +13,7 @@ public class ReleasedErrorCodeReportReader {
      * 
      * @param releasedReport report
      * @return read {@link ErrorCodeReport}
-     * @throws ErrorCodeReportReader.ReadException
+     * @throws ErrorCodeReportReader.ReadException if read fails
      */
     public ErrorCodeReport readReport(final ReleasedErrorCodeReport releasedReport)
             throws ErrorCodeReportReader.ReadException {

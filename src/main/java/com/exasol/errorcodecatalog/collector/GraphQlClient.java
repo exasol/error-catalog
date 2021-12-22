@@ -39,7 +39,12 @@ public class GraphQlClient {
         return "\"" + nextPage + "\"";
     }
 
-    public List<String> listRepos() {
+    /**
+     * List all public repos of the exasol integration team.
+     * 
+     * @return repository names
+     */
+    public List<String> listExasolIntegrationRepos() {
         final List<String> result = new ArrayList<>();
         Paginator paginator = new Paginator();
         while (paginator.isHasNextPage()) {
@@ -71,6 +76,12 @@ public class GraphQlClient {
         return result;
     }
 
+    /**
+     * Get the error code reports for all releases of a repository.
+     * 
+     * @param repository repository name in the Exasol organisation
+     * @return released reports
+     */
     public List<ReleaseReference> getReleaseArtifact(String repository) {
         final List<ReleaseReference> result = new ArrayList<>();
         final Paginator paginator = new Paginator();

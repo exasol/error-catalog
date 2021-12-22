@@ -25,7 +25,7 @@ class ErrorReportFinder {
      */
     List<ReleaseReference> findErrorReports() {
         final List<ReleaseReference> result = new ArrayList<>();
-        for (String repo : graphQlClient.listRepos()) {
+        for (String repo : graphQlClient.listExasolIntegrationRepos()) {
             result.addAll(graphQlClient.getReleaseArtifact(repo));
         }
         return result;

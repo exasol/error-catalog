@@ -2,7 +2,16 @@ package com.exasol.errorcodecatalog.collector;
 
 import com.exasol.errorreporting.ExaError;
 
+/**
+ * Reader for {@link GithubToken}.
+ */
 public class GithubTokenReader {
+
+    /**
+     * Read the GitHub token from the environment variable.
+     * 
+     * @return {@link GithubToken}
+     */
     public GithubToken readTokenFromEnv() {
         final String githubToken = System.getenv("GITHUB_TOKEN");
         if (githubToken == null || githubToken.isBlank()) {
