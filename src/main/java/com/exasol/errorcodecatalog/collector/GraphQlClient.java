@@ -194,8 +194,7 @@ public class GraphQlClient {
     private JsonObject parseResponse(final HttpResponse<InputStream> response) throws IOException {
         try (final InputStream inputStream = response.body();
                 final JsonReader jsonReader = Json.createReader(inputStream)) {
-            final JsonObject responseJson = jsonReader.readObject();
-            return responseJson;
+            return jsonReader.readObject();
         }
     }
 
