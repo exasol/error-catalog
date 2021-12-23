@@ -9,7 +9,7 @@ public class ProjectVersion implements Comparable<ProjectVersion> {
     private final String[] parts;
 
     /**
-     * Create a nwq instance of {@link ProjectVersion}.
+     * Create a new instance of {@link ProjectVersion}.
      *
      * @param semanticVersion version number
      */

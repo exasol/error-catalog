@@ -53,7 +53,7 @@ public class GraphQlClient {
     }
 
     /**
-     * List all public repos of the exasol integration team.
+     * List all public repos of the Exasol integration team.
      * 
      * @return repository names
      */
@@ -206,7 +206,7 @@ public class GraphQlClient {
             return buffer.toByteArray();
         } catch (final IOException exception) {
             throw new UncheckedIOException(
-                    ExaError.messageBuilder("F-EC-13").message("Exception while serializing to JSON.").toString(),
+                    ExaError.messageBuilder("F-EC-13").message("Failed to serialize to JSON.").toString(),
                     exception);
         }
     }
