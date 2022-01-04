@@ -8,11 +8,15 @@
 * #9: Added fonts locally
 * #18: Added support for error-code-report 1.0.0 syntax
 
+## Bug Fixes
+
+* #20: Fixed catalog creation for reports with no mitigations
+
 ## Dependency Updates
 
 ### Compile Dependency Updates
 
-* Added `com.exasol:error-code-model-java:1.1.0`
+* Added `com.exasol:error-code-model-java:1.1.1`
 * Added `com.exasol:error-reporting-java:0.4.1`
 * Added `com.j2html:j2html:1.5.0`
 * Added `info.picocli:picocli:4.6.2`
