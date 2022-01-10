@@ -3,8 +3,7 @@ package com.exasol.errorcodecatalog;
 import java.nio.file.Path;
 import java.util.List;
 
-import com.exasol.errorcodecatalog.collector.ErrorReportCollector;
-import com.exasol.errorcodecatalog.collector.ReleasedErrorCodeReport;
+import com.exasol.errorcodecatalog.collector.*;
 import com.exasol.errorcodecatalog.loader.ErrorReportLoader;
 import com.exasol.errorcodecatalog.renderer.ErrorCatalogRenderer;
 import com.exsol.errorcodemodel.ErrorCodeReport;
@@ -31,6 +30,11 @@ public class ErrorCatalog implements Runnable {
             "--output-directory" }, required = true, description = "Directory were the website will be written to.")
     private String outputDirectory;
 
+    /**
+     * Entry point.
+     * 
+     * @param arguments command line arguments
+     */
     public static void main(final String[] arguments) {
         final CommandLine commandLineClient = new CommandLine(new ErrorCatalog());
         final int exitCode = commandLineClient.execute(arguments);
@@ -41,7 +45,8 @@ public class ErrorCatalog implements Runnable {
      * Entry point of the error-catalog generator.
      */
     public void run() {
-        final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(Path.of(this.reportRepo))
+        final GithubToken githubToken = new GithubTokenReader().readTokenFromEnv();
+        final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(Path.of(this.reportRepo), githubToken)
                 .collectReports();
         final List<ErrorCodeReport> loadedReports = new ErrorReportLoader().loadReports(reports);
         new ErrorCatalogRenderer(Path.of(this.outputDirectory)).render(loadedReports);

@@ -1,7 +1,6 @@
 package com.exasol.errorcodecatalog.collector;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -14,12 +13,11 @@ import com.exasol.errorreporting.ExaError;
  * This class downloads the error-code reports from the github releases.
  */
 class ErrorReportDownloader {
-
     private final Path localRepo;
 
     /**
      * Create a new instance of {@link ErrorReportDownloader}.
-     * 
+     *
      * @param localRepo target directory for the error-code report files.
      */
     ErrorReportDownloader(final Path localRepo) {
@@ -60,11 +58,11 @@ class ErrorReportDownloader {
     }
 
     private Path downloadReportIfNotExistsInternal(final ReleaseReference release) throws IOException {
-        final Path repoPath = this.localRepo.resolve(release.repository());
+        final Path repoPath = this.localRepo.resolve(release.getRepository());
         if (!Files.exists(repoPath)) {
             Files.createDirectories(repoPath);
         }
-        final Path reportPath = repoPath.resolve(release.version() + ".json");
+        final Path reportPath = repoPath.resolve(release.getVersion() + ".json");
         if (!Files.exists(reportPath)) {
             downloadReport(release, reportPath);
         }
@@ -72,8 +70,9 @@ class ErrorReportDownloader {
     }
 
     private void downloadReport(final ReleaseReference release, final Path reportPath) throws IOException {
-        final URL reportUrl = new URL(release.errorReportUrl());
-        try (final ReadableByteChannel readableByteChannel = Channels.newChannel(reportUrl.openStream());
+        final URL reportUrl = new URL(release.getErrorReportUrl());
+        try (final InputStream inputStream = reportUrl.openStream();
+                final ReadableByteChannel readableByteChannel = Channels.newChannel(inputStream);
                 final FileOutputStream fileOutputStream = new FileOutputStream(reportPath.toFile())) {
             fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
         }

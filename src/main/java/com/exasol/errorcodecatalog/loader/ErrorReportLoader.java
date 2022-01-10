@@ -23,13 +23,15 @@ public class ErrorReportLoader {
      */
     public List<ErrorCodeReport> loadReports(final List<ReleasedErrorCodeReport> releasedReports) {
         final List<ErrorCodeReport> loadedReports = new ArrayList<>();
+        final ReleasedErrorCodeReportReader reportReader = new ReleasedErrorCodeReportReader();
         for (final ReleasedErrorCodeReport releasedReport : releasedReports) {
             try {
-                loadedReports.add(new ErrorCodeReportReader().readReport(releasedReport.errorCodeReport()));
+                final ErrorCodeReport report = reportReader.readReport(releasedReport);
+                loadedReports.add(report);
             } catch (final ErrorCodeReportReader.ReadException exception) {
                 LOGGER.severe(ExaError.messageBuilder("E-EC-4").message(
                         "Failed to parse error-code-report of {{repository name}} {{version}}. Case: {{cause|uq}}",
-                        releasedReport.projectName(), releasedReport.projectVersion(), exception.getMessage())
+                        releasedReport.getProjectName(), releasedReport.getProjectVersion(), exception.getMessage())
                         .toString());
             }
         }
