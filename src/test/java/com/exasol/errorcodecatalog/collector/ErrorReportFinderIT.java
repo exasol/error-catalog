@@ -6,10 +6,13 @@ import static org.hamcrest.Matchers.empty;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-class ErrorReportFinderTest {
+@Tag("integration")
+class ErrorReportFinderIT {
     private static final GithubToken GITHUB_TOKEN = new GithubTokenReader().readTokenFromEnv();
+
     @Test
     void test() {
         final List<ReleaseReference> errorReports = new ErrorReportFinder(GITHUB_TOKEN).findErrorReports();

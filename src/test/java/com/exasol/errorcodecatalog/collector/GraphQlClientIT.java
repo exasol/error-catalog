@@ -7,9 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-class GraphQlClientTest {
+@Tag("integration")
+class GraphQlClientIT {
     private static final GithubToken GITHUB_TOKEN = new GithubTokenReader().readTokenFromEnv();
 
     @Test

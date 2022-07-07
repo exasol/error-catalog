@@ -22,13 +22,13 @@ class UrlBuilderTest {
     })
     void testBuildProjectUrl(final String projectName, final String expectedUrl) {
         final Path url = new UrlBuilder().getUrlFor(new Project(projectName, Collections.emptyList()));
-        assertThat(url.toString(), equalTo(expectedUrl));
+        assertThat(url.toString(), equalTo(Path.of(expectedUrl).toString()));
     }
 
     @Test
     void testBuildErrorCodeUrl() {
         final Path url = new UrlBuilder().getUrlFor(new ErrorCodeVersions(
                 Map.of(new ProjectVersion("1.0.0"), ErrorMessageDeclaration.builder().identifier("E-TEST-1").build())));
-        assertThat(url.toString(), equalTo("error-codes/e-test-1.html"));
+        assertThat(url.toString(), equalTo(Path.of("error-codes/e-test-1.html").toString()));
     }
 }

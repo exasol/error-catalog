@@ -8,10 +8,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-class ErrorReportCollectorTest {
+@Tag("integration")
+class ErrorReportCollectorIT {
     private static final GithubToken GITHUB_TOKEN = new GithubTokenReader().readTokenFromEnv();
 
     @Test
