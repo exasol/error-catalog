@@ -25,7 +25,7 @@ The crawler will use the Github REST API to crawl the Exasol organisation public
 
 Covers:
 
-* `req~collecting-error-lists-from-github-projects~1`
+* [`req~collecting-error-lists-from-github-projects~1`](system_requirements.md#collecting-error-lists-from-github-projects)
 
 ## The parser
 
@@ -39,7 +39,7 @@ We split the CSS into a separate file.
 
 Covers:
 
-* `req~content-design-separation~1`
+* [`req~content-design-separation~1`](system_requirements.md#content--design-separation)
 
 ### Content Design
 
@@ -47,9 +47,18 @@ Covers:
 
 After a brief discussion we currently opt to use a minimal CSS style that will be hosted in a separate CSS file as well as a small logo. We might switch to a subset of bootstrap or something similar if this is required later on.
 
+Empiric results for error catalog of project-keeper-maven-plugin containing 69
+entries as of Thu July, 7th 2022:
+
+| Size HTML | Size raw text | Overhead | Item |
+| --- | ---| --- | --- |
+| 4324 | 824 | 81% | [complete catalogue](https://error-catalog.exasol.com/projects/project-keeper-maven-plugin.html) |
+| 528 | 245 | 54% | [Single entry E-PK-24](https://error-catalog.exasol.com/error-codes/e-pk-24.html) |
+
 Covers:
 
-* `req~corporate-design~1`
+* [`req~corporate-design~1`](system_requirements.md#corporate-design)
+* [`qs~page-overhead-limit~1`](system_requirements.md#page-overhead-limit)
 
 ### Usable without javascript
 
@@ -59,7 +68,7 @@ We will not depend on any javascript for any of the pages' functionality.
 
 Covers:
 
-* `req~usable-without-javascript~1`
+* [`req~usable-without-javascript~1`](system_requirements.md#usable-without-javascript)
 
 ### View With Any Browser
 
@@ -73,7 +82,7 @@ Also look into providing readability for visually impaired or other users.
 
 Covers:
 
-* `req~view-with-any-browser~1`
+* [`req~view-with-any-browser~1`](system_requirements.md#best-viewed-with-any-browser)
 
 ### Project Entry Point
 
@@ -84,7 +93,7 @@ We will generate an overview page that lists an overview of all the public proje
 
 Covers:
 
-* `req~projects-entry-point~1`
+* [`req~projects-entry-point~1`](system_requirements.md#projects-entry-point)
 
 ### Error detail pages
 
@@ -94,7 +103,8 @@ There will be a generated page for every error message.
 
 Covers:
 
-* `req~error-details~1`
+* [`req~error-details~1`](system_requirements.md#error-details)
+* [`req~finding-an-entry-by-code~1`](system_requirements.md#finding-an-entry-by-code)
 
 ### Catalog Entry Origin Details
 
@@ -104,7 +114,7 @@ This will be tricky to accomplish since we only have locally generated .json fil
 
 Covers:
 
-* `req~catalog-entry-origin-details~1`
+* [`req~catalog-entry-origin-details~1`](system_requirements.md#catalog-entry-origin-details)
 
 ### Finding entries by error code
 
@@ -118,6 +128,6 @@ A next step for a followup release will be to add a search engine, maybe full te
 
 Covers:
 
-* `req~finding-an-entry-by-code~1` 
+* [`req~finding-an-entry-by-code~1`](system_requirements.md#finding-an-entry-by-code)
 
 

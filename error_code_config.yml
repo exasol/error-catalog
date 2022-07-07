@@ -2,3 +2,4 @@ error-tags:
   EC:
     packages:
       - com.exasol.errorcodecatalog
+    highest-index: 17

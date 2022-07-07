@@ -1,0 +1,12 @@
+sources:
+  - type: maven
+    path: pom.xml
+    modules:
+      - lombok
+      - jar_artifact
+      - integration_tests
+
+linkReplacements:
+  - "https://awhitford.github.com/lombok.maven/lombok-maven-plugin/|http://anthonywhitford.com/lombok.maven/lombok-maven-plugin/"
+excludes:
+  - "E-PK-CORE-18: Outdated content: '.github/workflows/ci-build.yml'"
