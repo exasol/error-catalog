@@ -8,33 +8,8 @@
     <description>Tooling for crawling all error codes and generating a online error catalog.</description>
     <url>https://github.com/exasol/error-catalog/</url>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
         <junit.version>5.8.2</junit.version>
-        <gpg.skip>true</gpg.skip>
-        <org.testcontainers.version>1.15.1</org.testcontainers.version>
-        <!--
-            M4 does not fail tests if beforeAll fails
-            M5 fails in integration tests with a strange error
-            -->
-        <surefire.and.failsafe.plugin.version>3.0.0-M3</surefire.and.failsafe.plugin.version>
     </properties>
-    <licenses>
-        <license>
-            <name>MIT</name>
-            <url>https://opensource.org/licenses/MIT</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <name>Exasol</name>
-            <email>opensource@exasol.com</email>
-            <organization>Exasol AG</organization>
-            <organizationUrl>https://www.exasol.com/</organizationUrl>
-        </developer>
-    </developers>
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -131,27 +106,6 @@
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${surefire.and.failsafe.plugin.version}</version>
-                <configuration>
-                    <!-- Set the highest log level for coverage testing, so that we have a chance to reach branches
-                                <property> in the logging lambdas too. -->
-                    <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties ${argLine}</argLine>
-                    <includes>
-                        <include>**IT.java</include>
-                    </includes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
