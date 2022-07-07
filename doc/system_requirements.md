@@ -120,7 +120,7 @@ We want to create the catalog completely automatic. No manual work involved.
 
 Covers:
 
-* [feat~error-catalog-collection~1](#error-catalog-collection)
+* [`feat~error-catalog-collection~1`](#error-catalog-collection)
 
 Needs: dsn
 
@@ -138,7 +138,7 @@ Corporate designs change independently of the content.
 
 Covers:
 
-* [feat~error-catalog-presentation~1](#error-catalog-presentation)
+* [`feat~error-catalog-presentation~1`](#error-catalog-presentation)
 
 Needs: dsn
 
@@ -154,7 +154,7 @@ It looks more professional if the style is consistent.
 
 Covers:
 
-* [feat~error-catalog-presentation~1](#error-catalog-presentation)
+* [`feat~error-catalog-presentation~1`](#error-catalog-presentation)
 
 Needs: dsn
 
@@ -170,7 +170,7 @@ Portability and accessibility. Even a pure text browser should be enough, so tha
 
 Covers:
 
-* [feat~error-catalog-presentation~1](#error-catalog-presentation)
+* [`feat~error-catalog-presentation~1`](#error-catalog-presentation)
 
 Needs: dsn
 
@@ -189,7 +189,7 @@ Very useful in SQL clients for example!
 
 Covers:
 
-* [feat~error-catalog-presentation~1](#error-catalog-presentation)
+* [`feat~error-catalog-presentation~1`](#error-catalog-presentation)
 
 Needs: dsn
 
@@ -203,7 +203,7 @@ This allows users to check the user guides and FAQs.
 
 Covers:
 
-* [feat~error-catalog-presentation~1](#error-catalog-presentation)
+* [`feat~error-catalog-presentation~1`](#error-catalog-presentation)
 
 Needs: dsn
 
@@ -219,7 +219,7 @@ This helps finding out with which version of a software an error could be raised
 
 Covers:
 
-* [feat~error-catalog-presentation~1](#error-catalog-presentation)
+* [`feat~error-catalog-presentation~1`](#error-catalog-presentation)
 
 Needs: dsn
 
@@ -235,7 +235,7 @@ Code and description are self-explaining, cause information and mitigation are w
 
 Covers:
 
-* [feat~error-catalog-presentation~1](#error-catalog-presentation)
+* [`feat~error-catalog-presentation~1`](#error-catalog-presentation)
 
 Needs: dsn
 
@@ -251,7 +251,7 @@ This allows navigating to errors by "topic" (i.e. project).
 
 Covers:
 
-* [feat~error-catalog-presentation~1](#error-catalog-presentation)
+* [`feat~error-catalog-presentation~1`](#error-catalog-presentation)
 
 Needs: dsn
 
@@ -267,7 +267,7 @@ This is the most common way for quickly finding a solution.
 
 Covers:
 
-* [feat~error-catalog-presentation~1](#error-catalog-presentation)
+* [`feat~error-catalog-presentation~1`](#error-catalog-presentation)
 
 Needs: dsn
 
@@ -287,6 +287,6 @@ We want the pages to load fast and be embeddable.
 
 Covers:
 
-* [qg~user-experience~1](#user-experience)
+* [`qg~user-experience~1`](#user-experience)
 
 Needs: dsn

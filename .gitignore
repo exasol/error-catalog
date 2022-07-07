@@ -33,3 +33,4 @@ setEnv.sh
 *.orig
 *.old
 *.md.html
+*.flattened-pom.xml

@@ -1,0 +1,9 @@
+sources:
+  - type: maven
+    path: pom.xml
+    modules:
+      - lombok
+      - jar_artifact
+
+linkReplacements:
+  - "https://awhitford.github.com/lombok.maven/lombok-maven-plugin/|http://anthonywhitford.com/lombok.maven/lombok-maven-plugin/"
