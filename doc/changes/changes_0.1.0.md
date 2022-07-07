@@ -47,7 +47,7 @@ checker.  Fixed requirements tracing issues reported by openfasttrace.
 * Added `org.apache.maven.plugins:maven-compiler-plugin:3.10.1`
 * Added `org.apache.maven.plugins:maven-deploy-plugin:2.7`
 * Added `org.apache.maven.plugins:maven-enforcer-plugin:3.0.0`
-* Added `org.apache.maven.plugins:maven-failsafe-plugin:3.0.0-M3`
+* Added `org.apache.maven.plugins:maven-failsafe-plugin:3.0.0-M5`
 * Added `org.apache.maven.plugins:maven-install-plugin:2.4`
 * Added `org.apache.maven.plugins:maven-jar-plugin:3.2.2`
 * Added `org.apache.maven.plugins:maven-resources-plugin:2.6`
