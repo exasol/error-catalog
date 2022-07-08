@@ -1,5 +1,7 @@
 package com.exasol.errorcodecatalog;
 
+import static com.exasol.errorcodecatalog.collector.GithubTokenReader.readTokenFromEnv;
+
 import java.nio.file.Path;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class ErrorCatalog implements Runnable {
 
     /**
      * Entry point.
-     * 
+     *
      * @param arguments command line arguments
      */
     public static void main(final String[] arguments) {
@@ -44,8 +46,9 @@ public class ErrorCatalog implements Runnable {
     /**
      * Entry point of the error-catalog generator.
      */
+    @Override
     public void run() {
-        final GithubToken githubToken = new GithubTokenReader().readTokenFromEnv();
+        final GithubToken githubToken = readTokenFromEnv();
         final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(Path.of(this.reportRepo), githubToken)
                 .collectReports();
         final List<ErrorCodeReport> loadedReports = new ErrorReportLoader().loadReports(reports);
