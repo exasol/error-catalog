@@ -7,12 +7,16 @@ import com.exasol.errorreporting.ExaError;
  */
 public class GithubTokenReader {
 
+    private GithubTokenReader() {
+        // only static usage
+    }
+
     /**
      * Read the GitHub token from the environment variable.
      *
      * @return {@link GithubToken}
      */
-    static public GithubToken readTokenFromEnv() {
+    public static GithubToken readTokenFromEnv() {
         final String githubToken = System.getenv("GITHUB_TOKEN");
         if ((githubToken == null) || githubToken.isBlank()) {
             throw new IllegalArgumentException(

@@ -13,32 +13,32 @@
 
 ## Test Dependencies
 
-| Dependency                 | License                           |
-| -------------------------- | --------------------------------- |
-| [JUnit Jupiter Engine][10] | [Eclipse Public License v2.0][11] |
-| [JUnit Jupiter Params][10] | [Eclipse Public License v2.0][11] |
-| [Hamcrest][14]             | [BSD License 3][15]               |
-| [EqualsVerifier][16]       | [Apache License, Version 2.0][5]  |
+| Dependency                                | License                           |
+| ----------------------------------------- | --------------------------------- |
+| [JUnit Jupiter Engine][10]                | [Eclipse Public License v2.0][11] |
+| [JUnit Jupiter Params][10]                | [Eclipse Public License v2.0][11] |
+| [Hamcrest][14]                            | [BSD License 3][15]               |
+| [EqualsVerifier | release normal jar][16] | [Apache License, Version 2.0][17] |
 
 ## Plugin Dependencies
 
 | Dependency                                              | License                                       |
 | ------------------------------------------------------- | --------------------------------------------- |
 | [SonarQube Scanner for Maven][18]                       | [GNU LGPL 3][19]                              |
-| [Apache Maven Compiler Plugin][20]                      | [Apache License, Version 2.0][21]             |
-| [Apache Maven Enforcer Plugin][22]                      | [Apache License, Version 2.0][21]             |
+| [Apache Maven Compiler Plugin][20]                      | [Apache License, Version 2.0][17]             |
+| [Apache Maven Enforcer Plugin][22]                      | [Apache License, Version 2.0][17]             |
 | [Maven Flatten Plugin][24]                              | [Apache Software Licenese][5]                 |
 | [org.sonatype.ossindex.maven:ossindex-maven-plugin][26] | [ASL2][5]                                     |
 | [Reproducible Build Maven Plugin][28]                   | [Apache 2.0][5]                               |
-| [Maven Surefire Plugin][30]                             | [Apache License, Version 2.0][21]             |
-| [Versions Maven Plugin][32]                             | [Apache License, Version 2.0][21]             |
+| [Maven Surefire Plugin][30]                             | [Apache License, Version 2.0][17]             |
+| [Versions Maven Plugin][32]                             | [Apache License, Version 2.0][17]             |
 | [Project keeper maven plugin][34]                       | [The MIT License][35]                         |
 | [OpenFastTrace Maven Plugin][36]                        | [GNU General Public License v3.0][37]         |
-| [Apache Maven Assembly Plugin][38]                      | [Apache License, Version 2.0][21]             |
-| [Apache Maven JAR Plugin][40]                           | [Apache License, Version 2.0][21]             |
+| [Apache Maven Assembly Plugin][38]                      | [Apache License, Version 2.0][17]             |
+| [Apache Maven JAR Plugin][40]                           | [Apache License, Version 2.0][17]             |
 | [Artifact reference checker and unifier][42]            | [MIT][1]                                      |
 | [Lombok Maven Plugin][44]                               | [The MIT License][1]                          |
-| [Maven Failsafe Plugin][46]                             | [Apache License, Version 2.0][21]             |
+| [Maven Failsafe Plugin][46]                             | [Apache License, Version 2.0][17]             |
 | [JaCoCo :: Maven Plugin][48]                            | [Eclipse Public License 2.0][49]              |
 | [error-code-crawler-maven-plugin][50]                   | [MIT][1]                                      |
 | [Exec Maven Plugin][52]                                 | [Apache License 2][5]                         |
@@ -71,15 +71,15 @@
 [35]: https://github.com/exasol/project-keeper/blob/main/LICENSE
 [37]: https://www.gnu.org/licenses/gpl-3.0.html
 [2]: https://github.com/exasol/error-code-model-java
+[17]: https://www.apache.org/licenses/LICENSE-2.0.txt
 [18]: http://sonarsource.github.io/sonar-scanner-maven/
-[21]: https://www.apache.org/licenses/LICENSE-2.0.txt
+[16]: https://www.jqno.nl/equalsverifier
 [22]: https://maven.apache.org/enforcer/maven-enforcer-plugin/
 [11]: https://www.eclipse.org/legal/epl-v20.html
 [4]: http://j2html.com
 [58]: http://maven.apache.org/plugins/maven-install-plugin/
 [10]: https://junit.org/junit5/
 [26]: https://sonatype.github.io/ossindex-maven/maven-plugin/
-[16]: http://www.jqno.nl/equalsverifier
 [14]: http://hamcrest.org/JavaHamcrest/
 [60]: http://maven.apache.org/plugins/maven-deploy-plugin/
 [62]: http://maven.apache.org/plugins/maven-site-plugin/

@@ -24,14 +24,14 @@ checker.  Fixed requirements tracing issues reported by openfasttrace.
 
 ### Compile Dependency Updates
 
-* Added `com.exasol:error-code-model-java:1.1.1`
+* Added `com.exasol:error-code-model-java:2.1.0`
 * Added `com.exasol:error-reporting-java:0.4.1`
-* Added `com.j2html:j2html:1.5.0`
-* Added `info.picocli:picocli:4.6.2`
+* Added `com.j2html:j2html:1.6.0`
+* Added `info.picocli:picocli:4.6.3`
 
 ### Test Dependency Updates
 
-* Added `nl.jqno.equalsverifier:equalsverifier:3.8.1`
+* Added `nl.jqno.equalsverifier:equalsverifier:3.10`
 * Added `org.hamcrest:hamcrest:2.2`
 * Added `org.junit.jupiter:junit-jupiter-engine:5.8.2`
 * Added `org.junit.jupiter:junit-jupiter-params:5.8.2`
