@@ -1,4 +1,4 @@
-# Exasol Error Catalog 0.1.0, released 2022-??-??
+# Exasol Error Catalog 0.1.0, released 2022-07-08
 
 Code name: Initial release
 
