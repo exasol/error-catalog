@@ -11,8 +11,6 @@ import javax.json.*;
 
 import com.exasol.errorreporting.ExaError;
 
-import lombok.Getter;
-
 /**
  * Client for queries to the GitHub GraphQl API.
  */
@@ -60,7 +58,7 @@ public class GraphQlClient {
     public List<String> listExasolIntegrationRepos() {
         final List<String> result = new ArrayList<>();
         final Paginator paginator = new Paginator();
-        while (paginator.isHasNextPage()) {
+        while (paginator.hasNextPage()) {
             final String queryTemplate = getResourceAsString("listIntegrationReposQuery.gql");
             final String query = queryTemplate.replace("$cursor$", paginator.nextCursor()).replace("$pageSize$",
                     String.valueOf(this.pageSize));
@@ -99,7 +97,7 @@ public class GraphQlClient {
     public List<ReleaseReference> getReleaseArtifact(final String repository) {
         final List<ReleaseReference> result = new ArrayList<>();
         final Paginator paginator = new Paginator();
-        while (paginator.isHasNextPage()) {
+        while (paginator.hasNextPage()) {
             final String query = getReleaseArtifactQuery(repository, paginator);
             final JsonObject response = runGraphQlQuery(query);
             try {
@@ -212,13 +210,16 @@ public class GraphQlClient {
     }
 
     private static class Paginator {
-        @Getter
-        private boolean hasNextPage = true;
+        private boolean morePages = true;
         private String nextPage = null;
 
+        public boolean hasNextPage() {
+            return morePages;
+        }
+
         private void update(final JsonObject pageInfo) {
-            this.hasNextPage = pageInfo.getBoolean("hasNextPage");
-            if (this.hasNextPage) {
+            this.morePages = pageInfo.getBoolean("hasNextPage");
+            if (this.morePages) {
                 this.nextPage = pageInfo.getString("endCursor");
             }
         }
