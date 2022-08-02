@@ -23,14 +23,10 @@ public class ReleasedErrorCodeReportReader {
 
     private ErrorCodeReport addInfosFromReleaseToReportIfEmpty(ReleasedErrorCodeReport releasedReport,
             ErrorCodeReport report) {
-        ErrorCodeReport reportWithName = report;
-        if (report.getProjectName() == null || report.getProjectName().isBlank()) {
-            reportWithName = report.withProjectName(releasedReport.getProjectName());
-        }
-        if (report.getProjectVersion() == null || report.getProjectVersion().isBlank()) {
-            return reportWithName.withProjectVersion(releasedReport.getProjectVersion());
-        } else {
-            return reportWithName;
-        }
+        final String projectName = (report.getProjectName() == null || report.getProjectName().isBlank()) ?
+               releasedReport.getProjectName() : report.getProjectName();
+        final String projectVersion = (report.getProjectVersion() == null || report.getProjectVersion().isBlank()) ?
+                releasedReport.getProjectVersion() : report.getProjectVersion();
+        return new ErrorCodeReport(projectName, projectVersion, report.getErrorMessageDeclarations());
     }
 }

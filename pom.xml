@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>error-catalog</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <name>Exasol Error Catalog</name>
     <description>Tooling for crawling all error codes and generating a online error catalog.</description>
     <url>https://github.com/exasol/error-catalog/</url>
     <properties>
-        <junit.version>5.8.2</junit.version>
+        <junit.version>5.9.0</junit.version>
     </properties>
     <distributionManagement>
         <snapshotRepository>
@@ -25,7 +25,7 @@
             <dependency>
                 <groupId>software.amazon.awssdk</groupId>
                 <artifactId>bom</artifactId>
-                <version>2.17.227</version>
+                <version>2.17.244</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>error-code-model-java</artifactId>
-            <version>2.1.0</version>
+            <version>2.1.1</version>
         </dependency>
         <dependency>
             <groupId>com.j2html</groupId>
@@ -94,23 +94,23 @@
         <dependency>
             <groupId>nl.jqno.equalsverifier</groupId>
             <artifactId>equalsverifier</artifactId>
-            <version>3.10</version>
+            <version>3.10.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
         <plugins>
-					<plugin>
-						    <groupId>org.apache.maven.plugins</groupId>
-						    <artifactId>maven-failsafe-plugin</artifactId>
-						    <configuration>
-						      	<useModulePath>false</useModulePath>
-						    </configuration>
-						</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <useModulePath>false</useModulePath>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>2.4.6</version>
+                <version>2.5.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -167,7 +167,7 @@
     <parent>
         <artifactId>error-catalog-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>0.1.0</version>
+        <version>0.2.0</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
