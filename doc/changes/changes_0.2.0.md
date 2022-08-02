@@ -31,3 +31,4 @@ TODO: solve #12 and #13 (separate PRs)
 ### Plugin Dependency Updates
 
 * Updated `com.exasol:project-keeper-maven-plugin:2.4.6` to `2.5.0`
+* Removed `org.projectlombok:lombok-maven-plugin:1.18.20.0`
