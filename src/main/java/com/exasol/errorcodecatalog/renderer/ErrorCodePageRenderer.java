@@ -2,6 +2,7 @@ package com.exasol.errorcodecatalog.renderer;
 
 import static j2html.TagCreator.*;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,34 +17,58 @@ import j2html.tags.specialized.TrTag;
  * This class renders a catalog page per error-code.
  */
 class ErrorCodePageRenderer {
+    private final List<DomContent> htmlElements = new ArrayList<>();
+    private final PlaceholderNumberProvider placeholderNumberProvider = new PlaceholderNumberProvider();
+    private final ErrorTextRenderer textRenderer = new ErrorTextRenderer(placeholderNumberProvider);
 
     /**
      * Render a catalog page for an error-code.
-     * 
+     *
+     * @param project project the error code belongs to
      * @param errorCodeVersions all versions of the error code
      * @param subfolderDepth    count of directories that this page is nested relative to the web root
      * @return rendered HTML page
      */
-    String render(final ErrorCodeVersions errorCodeVersions, final int subfolderDepth) {
-        final ErrorMessageDeclaration errorMessageDeclaration = errorCodeVersions
-                .getVersion(errorCodeVersions.getLatestVersionNumber());
-        final List<DomContent> htmlElements = new ArrayList<>();
-        htmlElements.add(h1(errorMessageDeclaration.getIdentifier()));
-        htmlElements.add(h4("Message"));
-        final PlaceholderNumberProvider placeholderNumberProvider = new PlaceholderNumberProvider();
-        final ErrorTextRenderer textRenderer = new ErrorTextRenderer(placeholderNumberProvider);
-        final DomContent[] messageHtml = textRenderer.renderTextWithPlaceholders(errorMessageDeclaration.getMessage());
-        htmlElements.add(div(messageHtml).withClass("code"));
-        addMitigationSection(htmlElements, textRenderer, errorMessageDeclaration.getMitigations());
-
-        addPlaceholdersSection(htmlElements, placeholderNumberProvider, errorMessageDeclaration.getNamedParameters());
-
-        return new ErrorCatalogPageRender(new UrlBuilder()).render(errorMessageDeclaration.getIdentifier(),
+    String render(final Project project, final ErrorCodeVersions errorCodeVersions, final int subfolderDepth) {
+        final String version = errorCodeVersions.getLatestVersionNumber();
+        final ErrorMessageDeclaration error = errorCodeVersions.getVersion(version);
+        addErrorTitle(error.getIdentifier());
+        addMessageSection(error.getMessage());
+        addMitigationSection(error.getMitigations());
+        addPlaceholdersSection(error.getNamedParameters());
+        addSourceSection(project, version, error);
+        return new ErrorCatalogPageRenderer(new UrlBuilder()).render(error.getIdentifier(),
                 subfolderDepth, htmlElements.toArray(DomContent[]::new));
     }
 
-    private void addPlaceholdersSection(final List<DomContent> htmlElements,
-            final PlaceholderNumberProvider placeholderNumberProvider, final List<NamedParameter> namedParameters) {
+
+    private void addErrorTitle(final String identifier) {
+        htmlElements.add(h1(identifier));
+        htmlElements.add(h4("Message"));
+    }
+
+    private void addMessageSection(final String message) {
+        final DomContent[] messageHtml = textRenderer.renderTextWithPlaceholders(message);
+        htmlElements.add(div(messageHtml).withClass("code"));
+    }
+
+    private void addMitigationSection(final List<String> mitigations) {
+        if (mitigations.size() == 1) {
+            htmlElements.add(h4("Mitigation"));
+            final DomContent[] mitigationHtml = textRenderer.renderTextWithPlaceholders(mitigations.get(0));
+            htmlElements.add(div(mitigationHtml).withClass("code"));
+        } else if (mitigations.size() > 1) {
+            htmlElements.add(h4("Mitigations"));
+            final List<LiTag> mitigationsHtml = new ArrayList<>();
+            for (final String mitigation : mitigations) {
+                final DomContent[] mitigationHtml = textRenderer.renderTextWithPlaceholders(mitigation);
+                mitigationsHtml.add(li(mitigationHtml));
+            }
+            htmlElements.add(div(mitigationsHtml.toArray(DomContent[]::new)).withClass("code"));
+        }
+    }
+
+    private void addPlaceholdersSection(final List<NamedParameter> namedParameters) {
         if (existsPlaceholderWithDescription(namedParameters)) {
             htmlElements.add(h4("Parameters"));
             final List<TrTag> placeholdersHtml = new ArrayList<>();
@@ -72,20 +97,13 @@ class ErrorCodePageRenderer {
         }
     }
 
-    private void addMitigationSection(final List<DomContent> htmlElements, final ErrorTextRenderer textRenderer,
-            final List<String> mitigations) {
-        if (mitigations.size() == 1) {
-            htmlElements.add(h4("Mitigation"));
-            final DomContent[] mitigationHtml = textRenderer.renderTextWithPlaceholders(mitigations.get(0));
-            htmlElements.add(div(mitigationHtml).withClass("code"));
-        } else if (mitigations.size() > 1) {
-            htmlElements.add(h4("Mitigations"));
-            final List<LiTag> mitigationsHtml = new ArrayList<>();
-            for (final String mitigation : mitigations) {
-                final DomContent[] mitigationHtml = textRenderer.renderTextWithPlaceholders(mitigation);
-                mitigationsHtml.add(li(mitigationHtml));
-            }
-            htmlElements.add(div(mitigationsHtml.toArray(DomContent[]::new)).withClass("code"));
+    private void addSourceSection(final Project project, final String version, final ErrorMessageDeclaration error) {
+        final String sourceFile = error.getSourceFile();
+        final int line = error.getLine();
+        final URI linkTarget = new UrlBuilder().getSourceUriFor(project, version, error);
+        if(sourceFile != null && !sourceFile.isBlank()) {
+            htmlElements.add(h4("Source"));
+            htmlElements.add(a(code(sourceFile + ":" + line)).withHref(linkTarget.toString()));
         }
     }
 }
