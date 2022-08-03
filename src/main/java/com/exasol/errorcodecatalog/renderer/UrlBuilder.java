@@ -65,7 +65,7 @@ public class UrlBuilder {
             return new URI("https", GITHUB_HOST, path, fragment);
         } catch (URISyntaxException exception) {
             throw new IllegalArgumentException(ExaError.messageBuilder("E-EC-18")
-                    .message(exception.getMessage()).ticketMitigation().toString());
+                    .message("Unable to create source link URI").ticketMitigation().toString(), exception);
         }
     }
 }
