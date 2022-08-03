@@ -30,7 +30,7 @@ public class FrontPageRenderer {
                     .withHref("../".repeat(subfolderDepth) + urlBuilder.getUrlFor(project).toString())));
         }
         htmlElements.add(ul(projectsHtml.toArray(DomContent[]::new)));
-        return new ErrorCatalogPageRender(urlBuilder).render("Overview", subfolderDepth,
+        return new ErrorCatalogPageRenderer(urlBuilder).render("Overview", subfolderDepth,
                 htmlElements.toArray(DomContent[]::new));
     }
 }

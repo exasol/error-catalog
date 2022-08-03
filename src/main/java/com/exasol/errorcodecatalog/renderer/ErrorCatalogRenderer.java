@@ -95,7 +95,7 @@ public class ErrorCatalogRenderer {
         for (final Project project : projects) {
             for (final ErrorCodeVersions errorCodeVersions : project.getErrorCodes()) {
                 final Path url = this.urlBuilder.getUrlFor(errorCodeVersions);
-                writePage(url, errorCodePageRenderer.render(errorCodeVersions, url.getNameCount() - 1));
+                writePage(url, errorCodePageRenderer.render(project, errorCodeVersions, url.getNameCount() - 1));
             }
         }
     }

@@ -37,7 +37,7 @@ public class ProjectPageRenderer {
         final List<ErrorCodeVersions> activeErrorCodes = new ArrayList<>(project.getActiveErrorCodes());
         htmlElements.add(renderErrorCodeList(activeErrorCodes, ErrorCodeVersions::getIdentifier, subfolderDepth));
         addDeprecatedCodesSection(project, htmlElements, subfolderDepth);
-        return new ErrorCatalogPageRender(this.urlBuilder).render(project.getProjectName(), subfolderDepth,
+        return new ErrorCatalogPageRenderer(this.urlBuilder).render(project.getProjectName(), subfolderDepth,
                 htmlElements.toArray(DomContent[]::new));
     }
 

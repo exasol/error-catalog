@@ -7,15 +7,15 @@ import j2html.tags.DomContent;
 /**
  * This class renders a page of the error-catalog.
  */
-public class ErrorCatalogPageRender {
+public class ErrorCatalogPageRenderer {
     private final UrlBuilder urlBuilder;
 
     /**
-     * Create a new instance of {@link ErrorCatalogPageRender}.
+     * Create a new instance of {@link ErrorCatalogPageRenderer}.
      * 
      * @param urlBuilder URL builder
      */
-    public ErrorCatalogPageRender(final UrlBuilder urlBuilder) {
+    public ErrorCatalogPageRenderer(final UrlBuilder urlBuilder) {
         this.urlBuilder = urlBuilder;
     }
 
