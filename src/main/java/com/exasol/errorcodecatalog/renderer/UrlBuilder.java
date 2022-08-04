@@ -57,12 +57,13 @@ public class UrlBuilder {
     public URI getSourceUriFor(final Project project, final String projectVersion,
                                final ErrorMessageDeclaration error) {
         final int line = error.getLine();
-        final String path = URI_PATH_SEPARATOR + GITHUB_ORGANIZATION + URI_PATH_SEPARATOR + project.getProjectName()
+        final String sourcePath = error.getSourceFile();
+        final String uriPath = URI_PATH_SEPARATOR + GITHUB_ORGANIZATION + URI_PATH_SEPARATOR + project.getProjectName()
                 + URI_PATH_SEPARATOR + "blob" + URI_PATH_SEPARATOR  + projectVersion
-                + error.getSourceFile();
+                + (sourcePath.startsWith(URI_PATH_SEPARATOR) ? "" : URI_PATH_SEPARATOR) + sourcePath;
         final String fragment = "L" + line;
         try {
-            return new URI("https", GITHUB_HOST, path, fragment);
+            return new URI("https", GITHUB_HOST, uriPath, fragment);
         } catch (URISyntaxException exception) {
             throw new IllegalArgumentException(ExaError.messageBuilder("E-EC-18")
                     .message("Unable to create source link URI").ticketMitigation().toString(), exception);
