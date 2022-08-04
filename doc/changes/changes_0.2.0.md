@@ -1,4 +1,4 @@
-# Exasol Error Catalog 0.2.0, released 2022-08-??
+# Exasol Error Catalog 0.2.0, released 2022-08-04
 
 Code name: Source link
 
@@ -6,11 +6,12 @@ Code name: Source link
 
 Version 0.2.0 of the `exasol-error-catalog` adds a link to the sources in the error code detail view and removes Lombok from the project.
 
-TODO: solve #12 and #13 (separate PRs)
+We also added monitoring for the regular job that generates the error catalog
 
 ## Features
 
-* #13: Add source code link
+* #12: Added monitoring for catalog generation job 
+* #13: Added source code link
 
 ## Refactoring
 
