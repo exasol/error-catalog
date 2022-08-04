@@ -109,7 +109,6 @@ In this section lists functional requirements from the user's perspective. The r
 ### Error Catalog Collection
 
 #### Collecting Error Lists from GitHub Projects
-
 `req~collecting-error-lists-from-github-projects~1`
 
 A crawler collects the error details from all our GitHub repositories daily.
@@ -124,10 +123,20 @@ Covers:
 
 Needs: dsn
 
+#### Monitoring the Catalog Generation
+`req~monitoring-the-catalog-generation~1`
+
+The process collecting the error catalog details informs the catalog owner if the collection failed.
+
+Rationale:
+
+This prevents a situation where the process fails multiple times without anyone noticing.
+
+* [`feat~error-catalog-collection~1`](#error-catalog-collection)
+
 ### Error Catalog Presentation
 
 #### Content / Design Separation
-
 `req~content-design-separation~1`
 
 Content and design of the error catalog are separated.

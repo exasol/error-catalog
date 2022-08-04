@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repository
+      - name: "Checkout the repository"
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
@@ -19,21 +19,32 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Cache local Maven repository
+      - name: "Cache local Maven repository"
         uses: actions/cache@v2
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Generate catalog
+      - name: "Generate catalog"
         run: mvn compile exec:java
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Deploy 🚀
+      - name: "Deploy"
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           BRANCH: gh-pages
           FOLDER: target/catalog
           single-commit: true
           CLEAN: true
+      - name: "Report Status"
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notify_when: "failure"
+          notification_title: "Error catalog: {workflow} has {status_message}"
+          message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
+          footer: "Linked to Repo <{repo_url}|{repo}>"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ERROR_CATALOG_MONITORING_SLACK }}
