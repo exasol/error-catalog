@@ -100,8 +100,8 @@ class ErrorCodePageRenderer {
     private void addSourceSection(final Project project, final String version, final ErrorMessageDeclaration error) {
         final String sourceFile = error.getSourceFile();
         final int line = error.getLine();
-        final URI linkTarget = new UrlBuilder().getSourceUriFor(project, version, error);
         if(sourceFile != null && !sourceFile.isBlank()) {
+            final URI linkTarget = new UrlBuilder().getSourceUriFor(project, version, error);
             htmlElements.add(h4("Source"));
             htmlElements.add(a(code(sourceFile + ":" + line)).withHref(linkTarget.toString()));
         }
