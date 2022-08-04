@@ -134,6 +134,8 @@ This prevents a situation where the process fails multiple times without anyone 
 
 * [`feat~error-catalog-collection~1`](#error-catalog-collection)
 
+Needs: dsn
+
 ### Error Catalog Presentation
 
 #### Content / Design Separation
