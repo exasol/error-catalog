@@ -2,14 +2,13 @@
 
 This is the technical design document of the Error Catalog Project. The design fulfills the requirements we described in [system_requirements.md](system_requirements.md).
 
-## Architecture
-
-`arch~components~1`
+## Modules
 
 The error catalog consists of the following main parts:
 
 * Crawler: Collects error_code_report.json (JSON) files and stores them locally or in AWS, ideally in a folder with timestamp
-* Parser: Processes the stored .json files and turns them into documentation.
+* Parser: Processes the stored .json files and turns them into documentation
+* Monitor: Reports if the process of assembling the central error code catalog fails
 
 This documentation will then be transferred to a static web server somewhere.
 
@@ -19,7 +18,7 @@ Both will be implemented in java because of ease of use and setup and will be ru
 
 `dsn~collecting-error-lists-from-github-projects~1`
 
-The crawler will use the Github REST API to crawl the Exasol organisation public repositories and find all 'error_code_report.json` files. An internal list will be made and these files will then in a following step be downloaded. We plan on checking the version tag(s) per repository and if these increase fetch the new JSON file(s), and store these with the version tag (and possibly a timestamp) appended at the end of the JSON filenames.
+The crawler uses the GitHub REST API to crawl the Exasol organisation public repositories and find all 'error_code_report.json` files. An internal list will be made and these files will then in a following step be downloaded. We plan on checking the version tag(s) per repository and if these increase fetch the new JSON file(s), and store these with the version tag (and possibly a timestamp) appended at the end of the JSON filenames.
 
 -> TEST suggestion; see for the whole organisation and specify a minimum to compare against. -> TEST suggestion ; specify a collection -> see if we get the path to the JSON(s).
 
@@ -120,7 +119,7 @@ Covers:
 
 `dsn~finding-an-entry-by-code~1`
 
-Name pages as errorcodes.
+Name pages as error codes.
 
 #### Next step, search:
 
@@ -130,4 +129,11 @@ Covers:
 
 * [`req~finding-an-entry-by-code~1`](system_requirements.md#finding-an-entry-by-code)
 
+## Monitor
+`dsn~monitoring-the-catalog-generation~1`
 
+The monitor is a GitHub action that posts a notification to the owner of the error catalog in case of any failure.
+
+Covers:
+
+* [`req~monitoring-the-catalog-generation~1`](system_requirements.md#monitoring-the-catalog-generation)
