@@ -4,9 +4,9 @@ Code name: Source link
 
 ## Summary
 
-Version 0.2.0 of the `exasol-error-catalog` adds a link to the sources in the error code detail view and removes Lombok from the project.
+Version 0.2.0 of the `exasol-error-catalog` adds a link to the sources in the error code detail view, sorts the projects in the overview list alphabetically and removes Lombok from the project.
 
-We also added monitoring for the regular job that generates the error catalog
+We also added monitoring for the regular job that generates the error catalog.
 
 ## Features
 

@@ -3,6 +3,7 @@ package com.exasol.errorcodecatalog.renderer;
 import static j2html.TagCreator.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import j2html.tags.DomContent;
@@ -25,10 +26,12 @@ public class FrontPageRenderer {
         final List<DomContent> htmlElements = new ArrayList<>();
         htmlElements.add(h1("Exasol Error Catalog"));
         final List<LiTag> projectsHtml = new ArrayList<>(projects.size());
-        for (final Project project : projects) {
-            projectsHtml.add(li(a(project.getProjectName())
-                    .withHref("../".repeat(subfolderDepth) + urlBuilder.getUrlFor(project).toString())));
-        }
+        projects.stream() //
+                .sorted(Comparator.comparing(Project::getProjectName)) //
+                .forEach(project -> //
+                        projectsHtml.add(li(a(project.getProjectName())
+                                .withHref("../".repeat(subfolderDepth) + urlBuilder.getUrlFor(project).toString())))
+                );
         htmlElements.add(ul(projectsHtml.toArray(DomContent[]::new)));
         return new ErrorCatalogPageRenderer(urlBuilder).render("Overview", subfolderDepth,
                 htmlElements.toArray(DomContent[]::new));
