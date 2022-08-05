@@ -12,10 +12,15 @@ We also added monitoring for the regular job that generates the error catalog.
 
 * #12: Added monitoring for catalog generation job 
 * #13: Added source code link
+* #32: Sorted projects alphabetically
 
 ## Refactoring
 
 * #26: Removed Lombok
+
+## Bugfixes
+
+* #35: Code detail page now only shows one code at a time
 
 ## Dependency Updates
 

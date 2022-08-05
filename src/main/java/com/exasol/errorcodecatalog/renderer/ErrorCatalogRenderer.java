@@ -91,9 +91,9 @@ public class ErrorCatalogRenderer {
     }
 
     private void generateErrorCodePages(final List<Project> projects) {
-        final ErrorCodePageRenderer errorCodePageRenderer = new ErrorCodePageRenderer();
         for (final Project project : projects) {
             for (final ErrorCodeVersions errorCodeVersions : project.getErrorCodes()) {
+                final ErrorCodePageRenderer errorCodePageRenderer = new ErrorCodePageRenderer();
                 final Path url = this.urlBuilder.getUrlFor(errorCodeVersions);
                 writePage(url, errorCodePageRenderer.render(project, errorCodeVersions, url.getNameCount() - 1));
             }

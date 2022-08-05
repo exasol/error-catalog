@@ -1,5 +1,5 @@
 query {
-  search(query: "org:exasol topic:exasol-integration", type: REPOSITORY, first: $pageSize$, after: $cursor$){
+  search(query: "org:exasol topic:exasol-integration archived:false", type: REPOSITORY, first: $pageSize$, after: $cursor$){
     edges{
       node{
         ... on Repository{
