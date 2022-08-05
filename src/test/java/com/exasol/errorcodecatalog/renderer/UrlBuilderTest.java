@@ -34,12 +34,17 @@ class UrlBuilderTest {
         assertThat(url.toString(), equalTo(Path.of("error-codes/e-test-1.html").toString()));
     }
 
-    @Test
-    void testBuildSourceCodeUrl() {
+    @CsvSource({ //
+            "prj1, 2.4.6, /foo/bar.zoo, 42, https://github.com/exasol/prj1/blob/2.4.6/foo/bar.zoo#L42",
+            "prj2, 1.2.3, one/two.three, 33, https://github.com/exasol/prj2/blob/1.2.3/one/two.three#L33"
+    })
+    @ParameterizedTest
+    void testBuildSourceCodeUrl(final String projectName, final String version, final String path, final int line,
+                                final String expectedUrl) {
         final ErrorMessageDeclaration declaration = ErrorMessageDeclaration.builder()
-                .identifier("E-SRC-1").setPosition("/foo/bar.zoo", 42).build();
-        final Project project = new Project("the-project", Collections.emptyList());
-        final URI uri = new UrlBuilder().getSourceUriFor(project, "2.4.6", declaration);
-        assertThat(uri.toString(), equalTo("https://github.com/exasol/the-project/blob/2.4.6/foo/bar.zoo#L42"));
+                .identifier("E-NEVERMIND-1").setPosition(path, line).build();
+        final Project project = new Project(projectName, Collections.emptyList());
+        final URI uri = new UrlBuilder().getSourceUriFor(project, version, declaration);
+        assertThat(uri.toString(), equalTo(expectedUrl));
     }
 }
