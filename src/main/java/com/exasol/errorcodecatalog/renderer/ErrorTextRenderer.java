@@ -18,7 +18,7 @@ public class ErrorTextRenderer {
 
     /**
      * Create a new instance of {@link ErrorTextRenderer}.
-     * 
+     *
      * @param placeholderNumberProvider number provider that assigns each placeholder a number
      */
     public ErrorTextRenderer(final PlaceholderNumberProvider placeholderNumberProvider) {
@@ -37,7 +37,7 @@ public class ErrorTextRenderer {
         while (true) {
             final int paramStartIndex = text.indexOf("{{", lastIndex);
             final int paramEndIndex = text.indexOf("}}", paramStartIndex);
-            if (paramStartIndex == -1 || paramEndIndex == -1) {
+            if ((paramStartIndex == -1) || (paramEndIndex == -1)) {
                 textAsHtml.add(text(text.substring(lastIndex)));
                 break;
             } else {
@@ -55,7 +55,7 @@ public class ErrorTextRenderer {
             final String parameter) {
         final Iterator<Placeholder> placeholders = PlaceholderMatcher.findPlaceholders(parameter).iterator();
         if (placeholders.hasNext()) {
-            return placeholderNumberProvider.getNumberFor(placeholders.next().getName());
+            return placeholderNumberProvider.getNumberFor(placeholders.next().getReference());
         } else {
             return -1;
         }

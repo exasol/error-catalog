@@ -18,7 +18,7 @@ public class ErrorCatalogRenderer {
 
     /**
      * Create a new instance of {@link ErrorCatalogRenderer}.
-     * 
+     *
      * @param outputDirectory directory to write the report to
      */
     public ErrorCatalogRenderer(final Path outputDirectory) {
@@ -28,7 +28,7 @@ public class ErrorCatalogRenderer {
 
     /**
      * Render the error-catalog web site.
-     * 
+     *
      * @param loadedReports error code reports
      */
     public void render(final List<ErrorCodeReport> loadedReports) {
@@ -54,7 +54,7 @@ public class ErrorCatalogRenderer {
     private void generateProjectsPages(final List<Project> projects) {
         final ProjectPageRenderer projectPageRenderer = new ProjectPageRenderer(this.urlBuilder);
         for (final Project project : projects) {
-            final Path pageUrl = this.urlBuilder.getUrlFor(project);
+            final Path pageUrl = this.urlBuilder.getPathFor(project);
             writePage(pageUrl, projectPageRenderer.render(project, pageUrl.getNameCount() - 1));
         }
     }
