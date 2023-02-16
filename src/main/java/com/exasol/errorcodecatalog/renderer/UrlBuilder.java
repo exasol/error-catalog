@@ -15,6 +15,7 @@ public class UrlBuilder {
     public static final String GITHUB_HOST = "github.com";
     private static final String GITHUB_ORGANIZATION = "exasol";
     public static final String URI_PATH_SEPARATOR = "/";
+    private static final String SUFFIX = ".html";
 
     /**
      * Get the HTML URL for a project page
@@ -23,7 +24,7 @@ public class UrlBuilder {
      * @return URL as String
      */
     public String getUrlFor(final Project project) {
-        return "projects" + URI_PATH_SEPARATOR + getUrlFriendlyProjectName(project) + ".html";
+        return "projects" + URI_PATH_SEPARATOR + getUrlFriendlyProjectName(project) + SUFFIX;
     }
 
     /**
@@ -33,7 +34,7 @@ public class UrlBuilder {
      * @return URL as Path
      */
     public Path getPathFor(final Project project) {
-        return Path.of("projects", getUrlFriendlyProjectName(project) + ".html");
+        return Path.of("projects", getUrlFriendlyProjectName(project) + SUFFIX);
     }
 
     private String getUrlFriendlyProjectName(final Project project) {
@@ -47,7 +48,7 @@ public class UrlBuilder {
      * @return URL
      */
     public Path getUrlFor(final ErrorCodeVersions errorCode) {
-        return Path.of("error-codes", errorCode.getIdentifier().toLowerCase(Locale.ROOT) + ".html");
+        return Path.of("error-codes", errorCode.getIdentifier().toLowerCase(Locale.ROOT) + SUFFIX);
     }
 
     /**
