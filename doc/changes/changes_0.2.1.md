@@ -17,7 +17,7 @@ Code name:
 
 ### Test Dependency Updates
 
-* Updated `nl.jqno.equalsverifier:equalsverifier:3.10.1` to `3.13.1`
+* Updated `nl.jqno.equalsverifier:equalsverifier:3.10.1` to `3.14`
 * Updated `org.junit.jupiter:junit-jupiter-engine:5.9.0` to `5.9.2`
 * Updated `org.junit.jupiter:junit-jupiter-params:5.9.0` to `5.9.2`
 
