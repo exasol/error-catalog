@@ -4,9 +4,13 @@ Code name:
 
 ## Summary
 
-## Features
+## Bugfixes
 
 * #37: Remove discontinued repository maven.exasol.com
+
+## Refactoring
+
+* #44: Replaced project specific notification webhook with org wide secret
 
 ## Dependency Updates
 
