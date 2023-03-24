@@ -40,4 +40,4 @@ jobs:
           message_format: "{emoji} *{workflow}* {status_message} in <{repo_url}|{repo}>"
           footer: "Linked to Repo <{repo_url}|{repo}>"
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.ERROR_CATALOG_MONITORING_SLACK_HEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.INTEGRATION_TEAM_SLACK_NOTIFICATION_WEBHOOK }}
