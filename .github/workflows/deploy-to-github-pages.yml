@@ -20,7 +20,7 @@ jobs:
           java-version: 11
           cache: "maven"
       - name: "Generate catalog"
-        run: mvn compile exec:java
+        run: mvn compile exec:exec
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "Deploy"

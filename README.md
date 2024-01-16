@@ -27,7 +27,7 @@ Usually there is no need to generate the catalog. Instead, you can simply use th
 You can use this tool to generate an HTML error code catalog:
 
 * [Configure GitHub credentials / token](https://github-api.kohsuke.org/index.html#Environmental_variables)
-* Run `mvn compile exec:java`
+* Run `mvn compile exec:exec`
 
 Now you can find the catalog in `target/catalog`.
 
