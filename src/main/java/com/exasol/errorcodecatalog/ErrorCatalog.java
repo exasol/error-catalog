@@ -21,41 +21,41 @@ import picocli.CommandLine;
  * </p>
  */
 @CommandLine.Command( //
-                name = "error-catalog", //
-                description = "Exasol error-catalog generator" //
+        name = "error-catalog", //
+        description = "Exasol error-catalog generator" //
 )
 public class ErrorCatalog implements Runnable {
-        private static final Logger LOGGER = Logger.getLogger(ErrorCatalog.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ErrorCatalog.class.getName());
 
-        @CommandLine.Option(names = {
-                        "--report-repo" }, required = true, description = "Local directory for caching the error-report JSON files.")
-        private String reportRepo;
-        @CommandLine.Option(names = { "-o",
-                        "--output-directory" }, required = true, description = "Directory were the website will be written to.")
-        private String outputDirectory;
+    @CommandLine.Option(names = {
+            "--report-repo" }, required = true, description = "Local directory for caching the error-report JSON files.")
+    private String reportRepo;
+    @CommandLine.Option(names = { "-o",
+            "--output-directory" }, required = true, description = "Directory were the website will be written to.")
+    private String outputDirectory;
 
-        /**
-         * Entry point.
-         *
-         * @param arguments command line arguments
-         */
-        public static void main(final String[] arguments) {
-                final CommandLine commandLineClient = new CommandLine(new ErrorCatalog());
-                final int exitCode = commandLineClient.execute(arguments);
-                System.exit(exitCode);
-        }
+    /**
+     * Entry point.
+     *
+     * @param arguments command line arguments
+     */
+    public static void main(final String[] arguments) {
+        final CommandLine commandLineClient = new CommandLine(new ErrorCatalog());
+        final int exitCode = commandLineClient.execute(arguments);
+        System.exit(exitCode);
+    }
 
-        /**
-         * Entry point of the error-catalog generator.
-         */
-        @Override
-        public void run() {
-                LOGGER.info("Starting ErrorCatalog using repo path: " + reportRepo + " and output directory: "
-                                + outputDirectory);
-                final GithubToken githubToken = readTokenFromEnv();
-                final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(Path.of(this.reportRepo),
-                                githubToken).collectReports();
-                final List<ErrorCodeReport> loadedReports = new ErrorReportLoader().loadReports(reports);
-                new ErrorCatalogRenderer(Path.of(this.outputDirectory)).render(loadedReports);
-        }
+    /**
+     * Entry point of the error-catalog generator.
+     */
+    @Override
+    public void run() {
+        LOGGER.info(
+                "Starting ErrorCatalog using repo path: " + reportRepo + " and output directory: " + outputDirectory);
+        final GithubToken githubToken = readTokenFromEnv();
+        final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(Path.of(this.reportRepo), githubToken)
+                .collectReports();
+        final List<ErrorCodeReport> loadedReports = new ErrorReportLoader().loadReports(reports);
+        new ErrorCatalogRenderer(Path.of(this.outputDirectory)).render(loadedReports);
+    }
 }
