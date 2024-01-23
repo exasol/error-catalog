@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.*;
 
-import javax.json.*;
+import jakarta.json.*;
 
 import com.exasol.errorreporting.ExaError;
 
@@ -204,8 +204,7 @@ public class GraphQlClient {
             return buffer.toByteArray();
         } catch (final IOException exception) {
             throw new UncheckedIOException(
-                    ExaError.messageBuilder("F-EC-13").message("Failed to serialize to JSON.").toString(),
-                    exception);
+                    ExaError.messageBuilder("F-EC-13").message("Failed to serialize to JSON.").toString(), exception);
         }
     }
 

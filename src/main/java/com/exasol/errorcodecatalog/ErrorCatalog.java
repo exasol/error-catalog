@@ -4,6 +4,7 @@ import static com.exasol.errorcodecatalog.collector.GithubTokenReader.readTokenF
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.exasol.errorcodecatalog.collector.*;
 import com.exasol.errorcodecatalog.loader.ErrorReportLoader;
@@ -24,6 +25,7 @@ import picocli.CommandLine;
         description = "Exasol error-catalog generator" //
 )
 public class ErrorCatalog implements Runnable {
+    private static final Logger LOGGER = Logger.getLogger(ErrorCatalog.class.getName());
 
     @CommandLine.Option(names = {
             "--report-repo" }, required = true, description = "Local directory for caching the error-report JSON files.")
@@ -48,6 +50,8 @@ public class ErrorCatalog implements Runnable {
      */
     @Override
     public void run() {
+        LOGGER.info(() -> "Starting ErrorCatalog using repo path: " + reportRepo + " and output directory: "
+                + outputDirectory);
         final GithubToken githubToken = readTokenFromEnv();
         final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(Path.of(this.reportRepo), githubToken)
                 .collectReports();

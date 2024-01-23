@@ -1,7 +1,7 @@
 package com.exasol.errorcodecatalog.collector;
 
 import java.io.*;
-import java.net.URL;
+import java.net.*;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
@@ -70,11 +70,20 @@ class ErrorReportDownloader {
     }
 
     private void downloadReport(final ReleaseReference release, final Path reportPath) throws IOException {
-        final URL reportUrl = new URL(release.getErrorReportUrl());
+        final URI uri = getErrorReportURI(release);
+        final URL reportUrl = uri.toURL();
         try (final InputStream inputStream = reportUrl.openStream();
                 final ReadableByteChannel readableByteChannel = Channels.newChannel(inputStream);
                 final FileOutputStream fileOutputStream = new FileOutputStream(reportPath.toFile())) {
             fileOutputStream.getChannel().transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+        }
+    }
+
+    private URI getErrorReportURI(final ReleaseReference release) {
+        try {
+            return new URI(release.getErrorReportUrl());
+        } catch (final URISyntaxException exception) {
+            throw new IllegalStateException("invalid url: '" + release.getErrorReportUrl() + "'", exception);
         }
     }
 }
