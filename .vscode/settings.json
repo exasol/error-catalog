@@ -17,5 +17,6 @@
     "sonarlint.connectedMode.project": {
         "connectionId": "exasol",
         "projectKey": "com.exasol:error-catalog"
-    }
+    },
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
