@@ -24,6 +24,11 @@ Code name:
 * Updated `com.exasol:error-code-model-java:2.1.1` to `2.1.3`
 * Updated `com.exasol:error-reporting-java:0.4.1` to `1.0.1`
 * Updated `info.picocli:picocli:4.6.3` to `4.7.5`
+* Added `jakarta.json:jakarta.json-api:2.1.3`
+
+### Runtime Dependency Updates
+
+* Added `org.eclipse.parsson:parsson:1.1.5`
 
 ### Test Dependency Updates
 
