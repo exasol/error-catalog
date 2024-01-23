@@ -6,7 +6,7 @@
 | Dependency                 | License                                       |
 | -------------------------- | --------------------------------------------- |
 | [error-reporting-java][0]  | [MIT License][1]                              |
-| [Error Code Model Java][2] | [MIT][3]                                      |
+| [Error Code Model Java][2] | [MIT License][3]                              |
 | [j2html][4]                | [The Apache Software License, Version 2.0][5] |
 | [picocli][6]               | [The Apache Software License, version 2.0][5] |
 
@@ -34,19 +34,19 @@
 | [duplicate-finder-maven-plugin Maven Mojo][22]          | [Apache License 2.0][23]              |
 | [Project Keeper Maven plugin][24]                       | [The MIT License][25]                 |
 | [OpenFastTrace Maven Plugin][26]                        | [GNU General Public License v3.0][27] |
-| [Apache Maven Assembly Plugin][28]                      | [Apache License, Version 2.0][12]     |
+| [Apache Maven Assembly Plugin][28]                      | [Apache-2.0][12]                      |
 | [Apache Maven JAR Plugin][29]                           | [Apache License, Version 2.0][12]     |
 | [Artifact reference checker and unifier][30]            | [MIT License][31]                     |
 | [Maven Failsafe Plugin][32]                             | [Apache-2.0][12]                      |
 | [JaCoCo :: Maven Plugin][33]                            | [Eclipse Public License 2.0][34]      |
 | [error-code-crawler-maven-plugin][35]                   | [MIT License][36]                     |
 | [Reproducible Build Maven Plugin][37]                   | [Apache 2.0][5]                       |
-| [Exec Maven Plugin][38]                                 | [Apache License 2][5]                 |
+| [Exec Maven Plugin][38]                                 | [Apache License 2][12]                |
 
 [0]: https://github.com/exasol/error-reporting-java/
 [1]: https://github.com/exasol/error-reporting-java/blob/main/LICENSE
 [2]: https://github.com/exasol/error-code-model-java/
-[3]: https://opensource.org/licenses/MIT
+[3]: https://github.com/exasol/error-code-model-java/blob/main/LICENSE
 [4]: http://j2html.com
 [5]: http://www.apache.org/licenses/LICENSE-2.0.txt
 [6]: https://picocli.info
@@ -81,4 +81,4 @@
 [35]: https://github.com/exasol/error-code-crawler-maven-plugin/
 [36]: https://github.com/exasol/error-code-crawler-maven-plugin/blob/main/LICENSE
 [37]: http://zlika.github.io/reproducible-build-maven-plugin
-[38]: http://www.mojohaus.org/exec-maven-plugin
+[38]: https://www.mojohaus.org/exec-maven-plugin
