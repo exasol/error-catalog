@@ -31,10 +31,11 @@ class ErrorReportFinder {
         final List<String> repos = graphQlClient.listExasolIntegrationRepos();
         for (final String repo : repos) {
             count++;
+            final int finalCount = count;
             final List<ReleaseReference> releases = graphQlClient.getReleaseArtifact(repo);
             result.addAll(releases);
-            LOGGER.info(
-                    "Found " + releases.size() + " releases for '" + repo + "' (" + count + "/" + repos.size() + ")");
+            LOGGER.info(() -> "Found " + releases.size() + " releases for '" + repo + "' (" + finalCount + "/"
+                    + repos.size() + ")");
         }
         return result;
     }

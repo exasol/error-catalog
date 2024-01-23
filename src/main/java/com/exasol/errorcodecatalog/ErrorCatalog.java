@@ -50,8 +50,8 @@ public class ErrorCatalog implements Runnable {
      */
     @Override
     public void run() {
-        LOGGER.info(
-                "Starting ErrorCatalog using repo path: " + reportRepo + " and output directory: " + outputDirectory);
+        LOGGER.info(() -> "Starting ErrorCatalog using repo path: " + reportRepo + " and output directory: "
+                + outputDirectory);
         final GithubToken githubToken = readTokenFromEnv();
         final List<ReleasedErrorCodeReport> reports = new ErrorReportCollector(Path.of(this.reportRepo), githubToken)
                 .collectReports();
