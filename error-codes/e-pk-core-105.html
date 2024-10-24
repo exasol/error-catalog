@@ -1,0 +1,8 @@
+<html><title>Exasol Error Catalog – E-PK-CORE-105</title><head><link rel="stylesheet" href="../error-catalog-style.css"></head><body><a href="../index.html"><div id="navbar"><span>Exasol Error Catalog</span></div></a><div id="mainBox"><h1>E-PK-CORE-105</h1><h4>Message</h4><div class="code">Invalid pom file <span class="param" nr="0">{{file}}</span>: Required property &#x27;finalName&#x27; is missing in maven-assembly-plugin.</div><h4>Mitigation</h4><div class="code">Use the following template and set finalName:
+&lt;plugin&gt;
+    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+    &lt;configuration&gt;
+        &lt;finalName&gt;NAME_OF_YOUR_JAR&lt;/finalName&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;</div><h4>Source</h4><a href="https://github.com/exasol/project-keeper/blob/4.4.0/project-keeper/src/main/java/com/exasol/projectkeeper/validators/pom/PomFileValidator.java#L221"><code>project-keeper/src/main/java/com/exasol/projectkeeper/validators/pom/PomFileValidator.java:221</code></a></div></body></html>

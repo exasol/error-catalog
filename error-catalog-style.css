@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Inter Regular'), url('Inter-Regular.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Inter Italic'), url('Inter-Italic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Inter Bold'), url('Inter-Bold.woff') format('woff');
+}
+
+
+
+#navbar{
+    position: fixed;
+    display:block;
+    height: 60px;
+    background: red;
+    margin:0;
+    top:0;
+    left:0;
+    background: #122D4E;
+    width : 100%;
+    color: #fff;
+}
+
+#navbar span{
+    background: url("logo_error_catalog.svg") no-repeat left/contain;
+    display: block;
+    font: 0/0 a;
+    height: 40px;
+    width: 300px;
+    margin-left: 200px;
+    margin-top: 10px;
+}
+
+#mainBox{
+    margin-top: 180px;
+    font-family: Inter;
+    margin-left: 200px;
+    max-width: 1000px;
+}
+
+h1, h2{
+    color: #122D4E;
+}
+
+.code{
+    background: #eee;
+    padding: 15px;
+    font-family: Courier New;
+}
+
+ .param{
+      padding:4px;
+      border-radius: 4px;
+ }
+
+.param[nr="0"]{
+     color: #ff0066;
+}
+
+ .param[nr="1"]{
+       color: #ff3300;
+  }
+
+.param[nr="2"]{
+     color: #9933ff;
+}
+
+.param[nr="3"]{
+     color: #0033cc;
+}
+
+.param[nr="4"]{
+     color: #00cc66;
+}
+
+.param[nr="5"]{
+     color: #99cc00;
+}
+
+.param[nr="6"]{
+     color: #cc9900;
+}
+
+ a{
+   font-style: normal;
+   font-decoration:none;
+   color: #122D4E;
+ }
+
+
+@media only screen and (max-width: 800px) {
+  #mainBox {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+
+  #navbar span{
+  margin-left: 10px;
+  width: 250px;
+  }
+}
+
+.no-description{
+    color: #777;
+    font-style: italic;
+}
+
