@@ -4,3 +4,31 @@ sources:
     modules:
       - jar_artifact
       - integration_tests
+build:
+  workflows:
+    - name: "ci-build.yml"
+      stepCustomizations:
+        # Pass GitHub token as environment variable required for integration tests
+        - action: REPLACE
+          stepId: build-pk-verify
+          content:
+            name: Run tests and build with Maven
+            id: build-pk-verify
+            run: |
+              mvn --batch-mode clean verify \
+                  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
+                  -DtrimStackTrace=false
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: "release.yml"
+      stepCustomizations:
+        # Pass GitHub token as environment variable required for integration tests
+        - action: REPLACE
+          stepId: build
+          content:
+            name: Build project
+            id: build
+            run: mvn --batch-mode -DskipTests clean verify
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
