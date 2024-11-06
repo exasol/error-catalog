@@ -18,9 +18,9 @@ Both will be implemented in java because of ease of use and setup and will be ru
 
 `dsn~collecting-error-lists-from-github-projects~1`
 
-The crawler uses the GitHub REST API to crawl the Exasol organisation public repositories and find all 'error_code_report.json` files. An internal list will be made and these files will then in a following step be downloaded. We plan on checking the version tag(s) per repository and if these increase fetch the new JSON file(s), and store these with the version tag (and possibly a timestamp) appended at the end of the JSON filenames.
+The crawler uses the GitHub REST API to crawl the Exasol organization public repositories and find all 'error_code_report.json` files. An internal list will be made and these files will then in a following step be downloaded. We plan on checking the version tag(s) per repository and if these increase fetch the new JSON file(s), and store these with the version tag (and possibly a timestamp) appended at the end of the JSON filenames.
 
--> TEST suggestion; see for the whole organisation and specify a minimum to compare against. -> TEST suggestion ; specify a collection -> see if we get the path to the JSON(s).
+-> TEST suggestion; see for the whole organization and specify a minimum to compare against. -> TEST suggestion ; specify a collection -> see if we get the path to the JSON(s).
 
 Covers:
 
