@@ -25,7 +25,7 @@ jobs:
             17
           cache: "maven"
       - name: "Generate catalog"
-        run: mvn compile exec:exec
+        run: mvn --batch-mode compile exec:exec
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload artifact
