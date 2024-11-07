@@ -51,9 +51,9 @@ class ErrorReportDownloader {
         try {
             return downloadReportIfNotExistsInternal(release);
         } catch (final IOException exception) {
-            throw new IllegalStateException(
-                    ExaError.messageBuilder("E-EC-3").message("Failed download error-code report.").toString(),
-                    exception);
+            throw new IllegalStateException(ExaError.messageBuilder("E-EC-3").message(
+                    "Failed download error-code report for repo {{repo}} in version {{version}} for URL {{url}}.",
+                    release.getRepository(), release.getVersion(), release.getErrorReportUrl()).toString(), exception);
         }
     }
 
