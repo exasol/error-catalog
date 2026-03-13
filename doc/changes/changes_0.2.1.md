@@ -40,25 +40,28 @@ Code name:
 
 ### Plugin Dependency Updates
 
-* Updated `com.exasol:artifact-reference-checker-maven-plugin:0.4.0` to `0.4.2`
-* Updated `com.exasol:error-code-crawler-maven-plugin:1.1.1` to `2.0.3`
+* Updated `com.exasol:artifact-reference-checker-maven-plugin:0.4.0` to `0.4.4`
+* Updated `com.exasol:error-code-crawler-maven-plugin:1.1.1` to `2.0.6`
 * Updated `com.exasol:project-keeper-maven-plugin:2.5.0` to `5.4.6`
-* Added `com.exasol:quality-summarizer-maven-plugin:0.2.0`
-* Updated `io.github.zlika:reproducible-build-maven-plugin:0.15` to `0.17`
-* Updated `org.apache.maven.plugins:maven-assembly-plugin:3.3.0` to `3.7.1`
-* Updated `org.apache.maven.plugins:maven-clean-plugin:3.2.0` to `3.4.0`
-* Updated `org.apache.maven.plugins:maven-compiler-plugin:3.10.1` to `3.13.0`
-* Updated `org.apache.maven.plugins:maven-enforcer-plugin:3.0.0` to `3.5.0`
-* Updated `org.apache.maven.plugins:maven-failsafe-plugin:3.0.0-M5` to `3.5.1`
-* Updated `org.apache.maven.plugins:maven-install-plugin:3.1.2` to `3.1.3`
-* Updated `org.apache.maven.plugins:maven-jar-plugin:3.2.2` to `3.4.2`
-* Updated `org.apache.maven.plugins:maven-site-plugin:3.12.1` to `3.9.1`
-* Updated `org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M5` to `3.5.1`
+* Added `com.exasol:quality-summarizer-maven-plugin:0.2.1`
+* Added `io.github.git-commit-id:git-commit-id-maven-plugin:9.0.2`
+* Removed `io.github.zlika:reproducible-build-maven-plugin:0.15`
+* Added `org.apache.maven.plugins:maven-artifact-plugin:3.6.1`
+* Updated `org.apache.maven.plugins:maven-assembly-plugin:3.3.0` to `3.8.0`
+* Updated `org.apache.maven.plugins:maven-clean-plugin:3.2.0` to `3.5.0`
+* Updated `org.apache.maven.plugins:maven-compiler-plugin:3.10.1` to `3.15.0`
+* Updated `org.apache.maven.plugins:maven-enforcer-plugin:3.0.0` to `3.6.2`
+* Updated `org.apache.maven.plugins:maven-failsafe-plugin:3.0.0-M5` to `3.5.4`
+* Updated `org.apache.maven.plugins:maven-install-plugin:3.1.2` to `3.1.4`
+* Updated `org.apache.maven.plugins:maven-jar-plugin:3.2.2` to `3.5.0`
+* Updated `org.apache.maven.plugins:maven-resources-plugin:3.3.1` to `3.4.0`
+* Updated `org.apache.maven.plugins:maven-site-plugin:3.12.1` to `3.21.0`
+* Updated `org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M5` to `3.5.4`
 * Added `org.apache.maven.plugins:maven-toolchains-plugin:3.2.0`
 * Added `org.basepom.maven:duplicate-finder-maven-plugin:2.0.1`
 * Updated `org.codehaus.mojo:exec-maven-plugin:3.0.0` to `3.5.0`
-* Updated `org.codehaus.mojo:flatten-maven-plugin:1.2.7` to `1.6.0`
-* Updated `org.codehaus.mojo:versions-maven-plugin:2.10.0` to `2.17.1`
+* Updated `org.codehaus.mojo:flatten-maven-plugin:1.2.7` to `1.7.3`
+* Updated `org.codehaus.mojo:versions-maven-plugin:2.10.0` to `2.21.0`
 * Updated `org.itsallcode:openfasttrace-maven-plugin:1.5.0` to `2.2.0`
-* Updated `org.jacoco:jacoco-maven-plugin:0.8.8` to `0.8.12`
-* Updated `org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184` to `4.0.0.4121`
+* Updated `org.jacoco:jacoco-maven-plugin:0.8.8` to `0.8.14`
+* Updated `org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184` to `5.5.0.6356`
