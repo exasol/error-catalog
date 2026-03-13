@@ -6,7 +6,8 @@ Code name:
 
 ## Features
 
-* #46: Improved log output to see progress
+* #46: Improved log output to see progress 
+* #52: Generated HTML pages should contain generation timestamp
 
 ## Bugfixes
 

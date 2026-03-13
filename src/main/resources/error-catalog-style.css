@@ -45,11 +45,16 @@
     margin-top: 10px;
 }
 
+
 #mainBox{
     margin-top: 180px;
     font-family: Inter;
     margin-left: 200px;
     max-width: 1000px;
+}
+
+footer{
+    font-size:60%;
 }
 
 h1, h2{
