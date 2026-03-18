@@ -28,7 +28,7 @@ class GraphQlClientIT {
                 .filter(release -> release.getRepository().equals("s3-document-files-virtual-schema")
                         && release.getVersion().equals("1.1.0"))
                 .findAny().orElseThrow();
-        assertThat(s3Release.getErrorReportUrl(), startsWith("https://objects.githubusercontent.com/"));
+        assertThat(s3Release.getErrorReportUrl(), startsWith("https://release-assets.githubusercontent.com/"));
     }
 
     @Test
