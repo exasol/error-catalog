@@ -10,12 +10,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+
 class ErrorCatalogPageRendererTest {
     private ErrorCatalogPageRenderer renderer;
 
     @BeforeEach
     void beforeEach() {
-        this.renderer = new ErrorCatalogPageRenderer(new UrlBuilder());
+        this.renderer = new ErrorCatalogPageRenderer(
+                new UrlBuilder(),
+                Clock.fixed(Instant.parse("2026-03-11T11:39:00z"), ZoneId.of("UTC")));
     }
 
     @Test
@@ -24,7 +30,8 @@ class ErrorCatalogPageRendererTest {
         assertThat(result, equalTo("<html><title>Exasol Error Catalog – My Page</title>"
                 + "<head><link rel=\"stylesheet\" href=\"../error-catalog-style.css\"></head>"
                 + "<body><a href=\"../index.html\"><div id=\"navbar\"><span>Exasol Error Catalog</span></div></a>"
-                + "<div id=\"mainBox\"><h1>Test</h1></div></body></html>"));
+                + "<div id=\"mainBox\"><h1>Test</h1></div>"
+                + "<footer>Generated at: 11.03.2026 11:39:00</footer></body></html>"));
     }
 
     @ParameterizedTest

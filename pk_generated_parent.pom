@@ -3,15 +3,17 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>error-catalog-generated-parent</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
     <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
         <java.version>11</java.version>
         <sonar.organization>exasol</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <test.excludeTags/>
+        <ossindexSkip>false</ossindexSkip>
     </properties>
     <licenses>
         <license>
@@ -35,31 +37,45 @@
     </scm>
     <dependencies/>
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>3.1.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.5.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.21.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.6.3</version>
+                    <configuration>
+                        <environmentVariables>
+                            <EXASOL_TELEMETRY_DISABLE>true</EXASOL_TELEMETRY_DISABLE>
+                        </environmentVariables>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.4.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>3.1.3</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.9.1</version>
-            </plugin>
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>4.0.0.4121</version>
+                <version>5.5.0.6356</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -83,7 +99,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.15.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -97,7 +113,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.6.2</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -107,7 +123,7 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>3.6.3</version>
+                                    <version>3.8.7</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
                                     <version>17</version>
@@ -120,7 +136,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.6.0</version>
+                <version>1.7.3</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
                     <flattenMode>oss</flattenMode>
@@ -146,6 +162,11 @@
                 <groupId>org.sonatype.ossindex.maven</groupId>
                 <artifactId>ossindex-maven-plugin</artifactId>
                 <version>3.2.0</version>
+                <configuration>
+                    <authId>ossindex</authId>
+                    <!-- [impl->dsn~dependency-vulnerabilities~1] -->
+                    <skip>${ossindexSkip}</skip>
+                </configuration>
                 <executions>
                     <execution>
                         <id>audit</id>
@@ -159,22 +180,27 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.5.5</version>
                 <configuration>
-                    <!-- Set the highest log level for coverage testing, so that we
-          have a chance to reach branches in the logging lambdas too. -->
-                    <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties ${argLine}</argLine>
+                    <argLine>${argLine}</argLine>
+                    <environmentVariables>
+                        <EXASOL_TELEMETRY_DISABLE>true</EXASOL_TELEMETRY_DISABLE>
+                    </environmentVariables>
+                    <systemPropertyVariables>
+                        <!-- Set the highest log level for coverage testing, so that we have a chance to reach branches in the logging lambdas too. -->
+                        <java.util.logging.config.file>src/test/resources/logging.properties</java.util.logging.config.file>
+                    </systemPropertyVariables>
                     <excludedGroups>${test.excludeTags}</excludedGroups>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.17.1</version>
+                <version>2.21.0</version>
                 <executions>
                     <execution>
                         <id>display-updates</id>
-                        <phase>package</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>display-plugin-updates</goal>
                             <goal>display-dependency-updates</goal>
@@ -191,6 +217,7 @@
                     <generateBackupPoms>true</generateBackupPoms>
                     <processDependencies>true</processDependencies>
                     <processDependencyManagement>true</processDependencyManagement>
+                    <processDependencyManagementTransitive>false</processDependencyManagementTransitive>
                     <processParent>false</processParent>
                     <autoLinkItems>true</autoLinkItems>
                     <excludeReactor>true</excludeReactor>
@@ -223,8 +250,22 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-artifact-plugin</artifactId>
+                <version>3.6.1</version>
+                <executions>
+                    <execution>
+                        <id>check-build-plan</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check-buildplan</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.7.1</version>
+                <version>3.8.0</version>
                 <configuration>
                     <descriptors>
                         <descriptor>src/assembly/all-dependencies.xml</descriptor>
@@ -250,7 +291,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.2</version>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
                         <id>default-jar</id>
@@ -261,7 +302,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>artifact-reference-checker-maven-plugin</artifactId>
-                <version>0.4.2</version>
+                <version>0.4.4</version>
                 <executions>
                     <execution>
                         <id>verify</id>
@@ -274,11 +315,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.5.5</version>
                 <configuration>
-                    <!-- Set the highest log level for coverage testing, so that we have a chance to reach branches in the logging lambdas too. -->
-                    <argLine>-Djava.util.logging.config.file=src/test/resources/logging.properties ${argLine}</argLine>
-                    <systemPropertyVariables/>
+                    <argLine>${argLine}</argLine>
+                    <environmentVariables>
+                        <EXASOL_TELEMETRY_DISABLE>true</EXASOL_TELEMETRY_DISABLE>
+                    </environmentVariables>
+                    <systemPropertyVariables>
+                        <!-- Set the highest log level for coverage testing, so that we have a chance to reach branches in the logging lambdas too. -->
+                        <java.util.logging.config.file>src/test/resources/logging.properties</java.util.logging.config.file>
+                    </systemPropertyVariables>
                     <excludedGroups>${test.excludeTags}</excludedGroups>
                 </configuration>
                 <executions>
@@ -294,7 +340,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
+                <version>0.8.14</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -335,7 +381,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>quality-summarizer-maven-plugin</artifactId>
-                <version>0.2.0</version>
+                <version>0.2.1</version>
                 <executions>
                     <execution>
                         <id>summarize-metrics</id>
@@ -348,7 +394,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>error-code-crawler-maven-plugin</artifactId>
-                <version>2.0.3</version>
+                <version>2.0.7</version>
                 <executions>
                     <execution>
                         <id>verify</id>
@@ -359,18 +405,25 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>io.github.zlika</groupId>
-                <artifactId>reproducible-build-maven-plugin</artifactId>
-                <version>0.17</version>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>10.0.0</version>
                 <executions>
                     <execution>
-                        <id>strip-jar</id>
-                        <phase>package</phase>
+                        <id>get-the-git-infos</id>
                         <goals>
-                            <goal>strip-jar</goal>
+                            <goal>revision</goal>
                         </goals>
+                        <phase>initialize</phase>
                     </execution>
                 </executions>
+                <configuration>
+                    <verbose>true</verbose>
+                    <dateFormatTimeZone>UTC</dateFormatTimeZone>
+                    <includeOnlyProperties>
+                        <includeOnlyProperty>git.commit.time</includeOnlyProperty>
+                    </includeOnlyProperties>
+                </configuration>
             </plugin>
         </plugins>
     </build>

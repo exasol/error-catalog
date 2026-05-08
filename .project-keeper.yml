@@ -4,18 +4,23 @@ sources:
     modules:
       - jar_artifact
       - integration_tests
+excludes:
+  # Workaround for different Maven version used in CI
+  - regex: "E-PK-CORE-40: Changes file is invalid.*"
 build:
   workflows:
     - name: "ci-build.yml"
       stepCustomizations:
         # Pass GitHub token as environment variable required for integration tests
         - action: REPLACE
+          job: build-and-test
           stepId: build-pk-verify
           content:
             name: Run tests and build with Maven
             id: build-pk-verify
             run: |
               mvn --batch-mode clean verify \
+                  -DossindexSkip=true \
                   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
                   -DtrimStackTrace=false
             env:
@@ -25,10 +30,11 @@ build:
       stepCustomizations:
         # Pass GitHub token as environment variable required for integration tests
         - action: REPLACE
+          job: release
           stepId: build
           content:
             name: Build project
             id: build
-            run: mvn --batch-mode -DskipTests clean verify
+            run: mvn --batch-mode -DskipTests -DossindexSkip=true clean verify
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
