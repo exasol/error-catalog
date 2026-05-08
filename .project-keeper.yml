@@ -4,6 +4,9 @@ sources:
     modules:
       - jar_artifact
       - integration_tests
+excludes:
+  # Workaround for different Maven version used in CI
+  - regex: "E-PK-CORE-40: Changes file is invalid.*"
 build:
   workflows:
     - name: "ci-build.yml"

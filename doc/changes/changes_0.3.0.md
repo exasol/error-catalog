@@ -62,9 +62,9 @@ This release adds timestamps to generated HTML pages.
 * Updated `org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M5` to `3.5.5`
 * Added `org.apache.maven.plugins:maven-toolchains-plugin:3.2.0`
 * Added `org.basepom.maven:duplicate-finder-maven-plugin:2.0.1`
-* Updated `org.codehaus.mojo:exec-maven-plugin:3.0.0` to `3.5.0`
+* Updated `org.codehaus.mojo:exec-maven-plugin:3.0.0` to `3.6.3`
 * Updated `org.codehaus.mojo:flatten-maven-plugin:1.2.7` to `1.7.3`
 * Updated `org.codehaus.mojo:versions-maven-plugin:2.10.0` to `2.21.0`
-* Updated `org.itsallcode:openfasttrace-maven-plugin:1.5.0` to `2.2.0`
+* Updated `org.itsallcode:openfasttrace-maven-plugin:1.5.0` to `2.3.0`
 * Updated `org.jacoco:jacoco-maven-plugin:0.8.8` to `0.8.14`
 * Updated `org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184` to `5.5.0.6356`
