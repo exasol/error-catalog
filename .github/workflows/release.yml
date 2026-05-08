@@ -143,7 +143,7 @@ jobs:
         }
       - name: Build project
         id: build
-        run: mvn --batch-mode -DskipTests clean verify
+        run: mvn --batch-mode -DskipTests -DossindexSkip=true clean verify
         env: {
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         }

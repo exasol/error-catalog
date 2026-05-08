@@ -17,6 +17,7 @@ build:
             id: build-pk-verify
             run: |
               mvn --batch-mode clean verify \
+                  -DossindexSkip=true \
                   -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
                   -DtrimStackTrace=false
             env:
@@ -31,6 +32,6 @@ build:
           content:
             name: Build project
             id: build
-            run: mvn --batch-mode -DskipTests clean verify
+            run: mvn --batch-mode -DskipTests -DossindexSkip=true clean verify
             env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
